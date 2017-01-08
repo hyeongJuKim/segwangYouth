@@ -1,0 +1,9 @@
+/target/*
+.settings/*
+.metadata
+.project
+.classpath
+
+.springBeans
+
+*.swp
