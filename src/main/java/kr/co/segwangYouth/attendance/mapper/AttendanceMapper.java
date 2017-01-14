@@ -22,5 +22,4 @@ public class AttendanceMapper {
 		 return sqlSession.selectList("selectMemberList");
 	}
 	 
-	 
 }

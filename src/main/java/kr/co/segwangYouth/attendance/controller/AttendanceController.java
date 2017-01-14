@@ -1,6 +1,5 @@
 package kr.co.segwangYouth.attendance.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -29,10 +28,9 @@ public class AttendanceController {
 	@RequestMapping(value = "/attendance", method = RequestMethod.GET)
 	public String attendance(Model model) throws Exception{
 		
-			List<Map> selectList = (List<Map>) service.selectList();
-			System.out.println(selectList);
-			model.addAttribute("memberList",selectList);
-		
+			Map selectList = (Map) service.selectList();
+			model.addAttribute("selectList",selectList);
+			
 		return "attendance/attendance";
 	}	
 	
