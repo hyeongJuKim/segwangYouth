@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.segwangYouth.attendanceMapper">
-<!-- 
+<mapper namespace="kr.co.segwangYouth.memberManagementMapper">
+
     <select id="selectMemberList" resultType="java.util.Map">
 	SELECT MEMBER_NAME
-		 , SF_GET_CODE_NAME('AA',MEMBER_POSITION) AS MEMBER_POSITION
+         , CASE MEMBER_GENDER  
+               WHEN 'M' THEN '남' 
+               WHEN 'F' THEN '여' 
+               ELSE '?' 
+           END AS MEMBER_GENDER
 		 , SF_GET_CODE_NAME('AC',VILLAGE_CODE) AS VILLAGE_CODE
+		 , SF_GET_CODE_NAME('AA',MEMBER_POSITION) AS MEMBER_POSITION
+		 , MEMBER_JOB
 	 FROM  MEMBER
 	 ORDER BY VILLAGE_CODE DESC
     </select>
@@ -19,18 +25,17 @@
     </select>
     
     <select id="selectMemberCount" resultType="java.util.Map">
+	SELECT '청년 수' AS VILLAGE_NAME
+	     , COUNT(*) AS VILLAGE_CNT  
+      FROM MEMBER
+     WHERE MEMBER_POSITION NOT IN ('4','5','6')
+	UNION
 	SELECT SF_GET_CODE_NAME('AC', VILLAGE_CODE) AS VILLAGE_NAME
 		 , COUNT(VILLAGE_CODE) AS VILLAGE_CNT
       FROM MEMBER
     WHERE MEMBER_POSITION NOT IN ('4','5','6')
 	GROUP BY VILLAGE_CODE
-	UNION
-	SELECT '총 합계' AS VILLAGE_NAME
-	     , COUNT(*) AS VILLAGE_CNT  
-      FROM MEMBER
-     WHERE MEMBER_POSITION NOT IN ('4','5','6')
+     
     </select>
-    
-     -->
     
 </mapper>

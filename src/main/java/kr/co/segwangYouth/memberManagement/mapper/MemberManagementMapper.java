@@ -1,4 +1,4 @@
-package kr.co.segwangYouth.attendance.mapper;
+package kr.co.segwangYouth.memberManagement.mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -7,8 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("attendanceMapper")
-public class AttendanceMapper {
+@Repository("memberManagementMapper")
+public class MemberManagementMapper {
 	
     @Autowired
     private SqlSession sqlSession;
@@ -17,9 +17,9 @@ public class AttendanceMapper {
         this.sqlSession = sqlSession;
     }
     
-//    
-//	 public List<Map> selectMemberList() {
-//		 return sqlSession.selectList("selectMemberList");
-//	}
+    
+	 public List<Map> selectMemberList() {
+		 return sqlSession.selectList("selectMemberList");
+	}
 	 
 }

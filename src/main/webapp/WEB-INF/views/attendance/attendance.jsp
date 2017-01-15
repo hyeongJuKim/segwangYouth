@@ -6,71 +6,43 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+
+<link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="./webjars/bootstrap/3.3.5//css/bootstrap.min.css">
+
 <style type="text/css">
-	body{
-	
-	}
-	
-	table {
-		border : 1px solid black;
-		
-	}
-	tr, td { 
-		padding : 3px; 
-	}
-	
-	
+
+.table-search{
+    height: 258px !important;
+    overflow: scroll;
+}
+
+
 </style>
-<title>세광청년부 - 청년 조회</title>
+
+<title>세광청년부 - 청년부 교적부</title>
 </head>
 <body>
 
-<div>
-	이름: <input type="text"/> <br>
-	소속 마을:
-<select>
-	<option value="">전체선택</option>
-<c:forEach var="codeList" items="${selectList.codeListAC}">
-  <option value="${CODE_NO}">${codeList.CODE_NAME}</option>
-  </c:forEach>
-</select> <br>
-	직책:
-<select>
-	<option value="">전체선택</option>
-<c:forEach var="codeList" items="${selectList.codeListAA}">
-  <option value="${CODE_NO}">${codeList.CODE_NAME}</option>
-  </c:forEach>
-</select> <br>
 
-	<button type="button">조회</button>
-</div> <br>
 
-조회 결과 (${fn:length(selectList.memberList)}명)
-<table>
-	<tr>
-		<td>소속마을</td>
-		<td>이름</td>
-		<td>직책</td>
-		
-	</tr>
-<c:forEach var="member" items="${selectList.memberList}">
-	<tr>
-		<td>${member.VILLAGE_CODE}마을</td>
-		<td>${member.MEMBER_NAME}</td>
-		<td>${member.MEMBER_POSITION}</td>
-	</tr>
-</c:forEach>
-</table>
 
-각 마을별 전체 인원
-<table>
-<c:forEach var="memberCnt" items="${selectList.memberCount}">
-	<tr>
-		<td>${memberCnt.VILLAGE_NAME}마을 : ${memberCnt.VILLAGE_CNT}명</td>		
-	</tr>
-</c:forEach>
-</table>
 
+
+
+
+
+<!-- jQuery -->
+<script src="./webjars/jquery/3.0.0-alpha1/dist/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="./webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 </body>
 </html>

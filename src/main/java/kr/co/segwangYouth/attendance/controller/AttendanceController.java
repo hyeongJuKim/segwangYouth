@@ -28,9 +28,9 @@ public class AttendanceController {
 	@RequestMapping(value = "/attendance", method = RequestMethod.GET)
 	public String attendance(Model model) throws Exception{
 		
-			Map selectList = (Map) service.selectList();
-			model.addAttribute("selectList",selectList);
-			
+//			Map selectList = (Map) service.selectList();
+//			model.addAttribute("selectList",selectList);
+//			
 		return "attendance/attendance";
 	}	
 	
