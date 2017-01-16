@@ -19,6 +19,7 @@
 <style type="text/css">
 body{
 	font-size: 12px;
+	background-color: #F7F7F7; 
 }
 
 .table-search{
@@ -39,14 +40,25 @@ body{
 }
 
 
+/* 각 컴포넌트별 구분 */
+.customDiv {
+	background: #fff;
+	padding: 10px 17px;
+	border: 1px solid #E6E9ED;
+}
+
+
+
 </style>
 <title>세광청년부 - 청년부 교적부</title>
 </head>
+
+
 <body>
 <div class="container">
 	
 	<div class="row">
-	<div>
+	<div class="customDiv">
 		이름: <input type="text"/> <br>
 		마을:
 	<select>
@@ -64,11 +76,12 @@ body{
 	</select> <br>
 	
 		<button type="button">조회</button>
-	</div> <br>
+	</div> 
 	
+<br>
+	
+	<div class="table-search customDiv">
 	조회 결과 (${fn:length(selectList.memberList)}명)
-	
-	<div class="table-search">
 		<table class="table table-bordered table-hover table-condensed">
 			<thead>
 			<tr class="active">
@@ -92,9 +105,9 @@ body{
 	</div><!--  c;ass="table-search" -->
 	</div><!-- div class="row" -->
 	
-<br><br>
+<br>
 	
-	<div class="row">
+	<div class="row customDiv">
 		마을별 전체 인원 <br>
 		<c:forEach var="memberCnt" items="${selectList.memberCount}" varStatus="status">
 		<span class="villageGroupCount">

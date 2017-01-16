@@ -13,13 +13,20 @@ public class MemberManagementMapper {
     @Autowired
     private SqlSession sqlSession;
  
-    public void setSqlSession(SqlSession sqlSession){
-        this.sqlSession = sqlSession;
-    }
     
-    
-	 public List<Map> selectMemberList() {
+    //TODO: 나중에 검색조건들을 param으로 받아서 사용.
+    public List<Map> selectMemberList() {
 		 return sqlSession.selectList("selectMemberList");
 	}
+    
+    public List<Map> selectCodeList(String classCode){
+    	return sqlSession.selectList("selectCodeList",classCode);
+    }
+    
+    public List<Map> selectMemberCount(){
+    	return sqlSession.selectList("selectMemberCount");
+    }
+    
+	 
 	 
 }
