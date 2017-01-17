@@ -1,11 +1,9 @@
 package kr.co.segwangYouth.memberManagement.service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +16,10 @@ public class MemberManagementService {
 //	@Autowired
 //	private SqlSessionTemplate sqlSession;	
 	
-	
 	@Autowired 
 	private MemberManagementMapper mapper;
 	
-	
-    public Map selectList() throws SQLException {
+    public Map selectList() throws Exception {
     	
     	Map<String, Object> selectList = new HashMap();
     

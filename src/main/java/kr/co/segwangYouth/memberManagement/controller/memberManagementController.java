@@ -22,7 +22,7 @@ public class memberManagementController {
 	private static final Logger logger = LoggerFactory.getLogger(memberManagementController.class);
 	
 	@Autowired
-	MemberManagementService service;
+	private MemberManagementService service;
 	
 	
 	@RequestMapping(value = "/memberManagement", method = RequestMethod.GET)

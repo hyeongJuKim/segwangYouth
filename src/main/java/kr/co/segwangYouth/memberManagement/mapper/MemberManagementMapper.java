@@ -3,30 +3,17 @@ package kr.co.segwangYouth.memberManagement.mapper;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository("memberManagementMapper")
-public class MemberManagementMapper {
-	
-    @Autowired
-    private SqlSession sqlSession;
- 
+//@Repository("memberManagementMapper")
+//@MapperScan("kr.co.segwangYouth.mapper")
+@Mapper
+public interface MemberManagementMapper {
+
+    public List<Map> selectMemberList();
     
-    //TODO: 나중에 검색조건들을 param으로 받아서 사용.
-    public List<Map> selectMemberList() {
-		 return sqlSession.selectList("selectMemberList");
-	}
+    public List<Map> selectCodeList(String classCode);
     
-    public List<Map> selectCodeList(String classCode){
-    	return sqlSession.selectList("selectCodeList",classCode);
-    }
-    
-    public List<Map> selectMemberCount(){
-    	return sqlSession.selectList("selectMemberCount");
-    }
-    
-	 
+    public List<Map> selectMemberCount();
 	 
 }
