@@ -25,11 +25,11 @@ public class MemberManagementService {
     
     	List<Map> memberList = mapper.selectMemberList();
     	List<Map> codeListAA = mapper.selectCodeList("AA");
-    	List<Map> codeListAC = mapper.selectCodeList("AC");
+    	List<Map> villageAllList = mapper.selectVillageAllList();
     	List<Map> memberCount = mapper.selectMemberCount();	// 미을 전체 조회
     	
     	selectList.put("codeListAA", codeListAA); // 직급코드 조회
-    	selectList.put("codeListAC", codeListAC); // 직급코드 조회
+    	selectList.put("villageAllList", villageAllList); // 마을장 조회
     	selectList.put("memberCount", memberCount); // 청년 통계
     	selectList.put("memberList", memberList); // 청년 조회
     	

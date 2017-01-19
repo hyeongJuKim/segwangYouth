@@ -42,9 +42,9 @@ body{
 
 /* 각 컴포넌트별 구분 */
 .customDiv {
-	background: #fff;
-	padding: 10px 17px;
-	border: 1px solid #E6E9ED;
+/* 	background: #fff; */
+	/* padding: 10px 17px; */
+	/* border: 1px solid #E6E9ED; */
 }
 
 
@@ -58,63 +58,94 @@ body{
 <div class="container">
 	
 	<div class="row">
-	<div class="customDiv">
-		이름: <input type="text"/> <br>
-		마을:
-	<select>
-		<option value="">전체선택</option>
-	<c:forEach var="codeList" items="${selectList.codeListAC}">
-	  <option value="${CODE_NO}">(${codeList.CODE_NO}) ${codeList.CODE_NAME}</option>
-	  </c:forEach>
-	</select> <br>
-		직책:
-	<select>
-		<option value="">전체선택</option>
-	<c:forEach var="codeList" items="${selectList.codeListAA}">
-	  <option value="${CODE_NO}">${codeList.CODE_NAME}</option>
-	  </c:forEach>
-	</select> <br>
 	
-		<button type="button">조회</button>
-	</div> 
-	
-<br>
-	
-	<div class="table-search customDiv">
-	조회 결과 (${fn:length(selectList.memberList)}명)
-		<table class="table table-bordered table-hover table-condensed">
-			<thead>
-			<tr class="active">
-				<td>이름</td>
-				<td style="width: 50px;">성별</td>
-				<td>마을</td>
-				<td>직책</td>
-				<td>직업</td>
-			</tr>
-			</thead>
-		<c:forEach var="member" items="${selectList.memberList}">
-			<tr>
-				<td>${member.MEMBER_NAME}</td>
-				<td>${member.MEMBER_GENDER}</td>
-				<td>${member.VILLAGE_CODE}마을</td>
-				<td>${member.MEMBER_POSITION}</td>
-				<td>${member.MEMBER_JOB}</td>
-			</tr>
-		</c:forEach>
-		</table>
-	</div><!--  c;ass="table-search" -->
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">조회</h3>
+		  </div>
+		  <div class="panel-body">
+				이름: <input type="text"/>
+				마을:
+			<select>
+				<option value="">전체선택</option>
+			<c:forEach var="villageList" items="${selectList.villageAllList}">
+			  <option value="${villageList.VILLAGE_SEQ}">${villageList.VILLAGE_NAME}</option>
+			  </c:forEach>
+			</select>
+				직책:
+			<select>
+				<option value="">전체선택</option>
+			<c:forEach var="codeList" items="${selectList.codeListAA}">
+			  <option value="${CODE_NO}">${codeList.CODE_NAME}</option>
+			  </c:forEach>
+			</select>
+				<button type="button">조회</button>  
+		  </div>
+		</div>	
 	</div><!-- div class="row" -->
 	
-<br>
 	
-	<div class="row customDiv">
+	
+	<div class="row">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">쳥년</h3>
+		  </div>
+		  <div class="panel-body">
+		<div class="table-search">
+			조회 결과 (${fn:length(selectList.memberList)}명)
+				<table class="table table-bordered table-hover table-condensed">
+					<thead>
+					<tr class="active">
+						<td>이름</td>
+						<td style="width: 50px;">성별</td>
+						<td>마을</td>
+						<td>직책</td>
+						<td>직업</td>
+					</tr>
+					</thead>
+				<c:forEach var="member" items="${selectList.memberList}">
+					<tr>
+						<td>${member.MEMBER_NAME}</td>
+						<td>${member.MEMBER_GENDER}</td>
+						<td>${member.VILLAGE_NAME}마을</td>
+						<td>${member.MEMBER_POSITION}</td>
+						<td>${member.MEMBER_JOB}</td>
+					</tr>
+				</c:forEach>
+				</table>
+			</div><!--  class="table-search" -->		  
+		  </div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="row">
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">마을별 전체 인원</h3>
+		</div>
+		<div class="panel-body">
+			<c:forEach var="memberCnt" items="${selectList.memberCount}" varStatus="status">
+			<span class="villageGroupCount">
+				${memberCnt.VILLAGE_NAME}<c:if test="${status.index != 0}">마을</c:if> : ${memberCnt.VILLAGE_CNT}명		
+			</span>
+			</c:forEach>  
+		</div>
+		</div>
+	</div>
+	
+	
+	
+<%-- 	<div class="row customDiv">
 		마을별 전체 인원 <br>
 		<c:forEach var="memberCnt" items="${selectList.memberCount}" varStatus="status">
 		<span class="villageGroupCount">
 			${memberCnt.VILLAGE_NAME}<c:if test="${status.index != 0}">마을</c:if> : ${memberCnt.VILLAGE_CNT}명		
 		</span>
 		</c:forEach>
-	</div>
+	</div> --%>
 	
 
 <!-- jQuery -->

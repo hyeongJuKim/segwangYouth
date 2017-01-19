@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.segwangYouth.memberManagementMapper">
+<mapper namespace="kr.co.segwangYouth.memberManagement.mapper.MemberManagementMapper">
 
     <select id="selectMemberList" resultType="java.util.Map">
 	SELECT MEMBER_NAME
@@ -10,13 +10,22 @@
                WHEN 'F' THEN '여' 
                ELSE '?' 
            END AS MEMBER_GENDER
-		 , SF_GET_CODE_NAME('AC',VILLAGE_CODE) AS VILLAGE_CODE
 		 , SF_GET_CODE_NAME('AA',MEMBER_POSITION) AS MEMBER_POSITION
 		 , MEMBER_JOB
-	 FROM  MEMBER
-	 ORDER BY VILLAGE_CODE DESC
+	 FROM  MEMBER A, VILLAGE B
+	 WHERE A.VILLAGE_SEQ = B.VILLAGE_SEQ
+	   AND B.VILLAGE_USE_YN = 'Y'
+ 	 ORDER BY A.MEMBER_NAME DESC
     </select>
-    
+
+	<select id="selectVillageAllList" resultType="java.util.Map">
+		SELECT VILLAGE_SEQ
+			 , VILLAGE_NAME 
+		 FROM  VILLAGE
+		WHERE VILLAGE_USE_YN = 'Y'
+		ORDER BY VILLAGE_NAME
+	</select>
+
     <select id="selectCodeList" resultType="java.util.Map">
 	 SELECT A.CLASS_NAME, CODE_NO, CODE_NAME
 	  FROM CLASS_CODE_MASTER A, CODE_DETAIL B
@@ -30,12 +39,12 @@
       FROM MEMBER
      WHERE MEMBER_POSITION NOT IN ('4','5','6')
 	UNION
-	SELECT SF_GET_CODE_NAME('AC', VILLAGE_CODE) AS VILLAGE_NAME
-		 , COUNT(VILLAGE_CODE) AS VILLAGE_CNT
-      FROM MEMBER
+	SELECT B.VILLAGE_NAME
+		 , COUNT(B.VILLAGE_NAME) AS VILLAGE_CNT
+      FROM MEMBER A, VILLAGE B
     WHERE MEMBER_POSITION NOT IN ('4','5','6')
-	GROUP BY VILLAGE_CODE
-     
+	  AND A.VILLAGE_SEQ = B.VILLAGE_SEQ
+ 	GROUP BY B.VILLAGE_NAME
     </select>
     
 </mapper>
