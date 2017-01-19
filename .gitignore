@@ -7,3 +7,9 @@
 .springBeans
 
 *.swp
+
+
+# gitbub에공개로 올라가기때문에 보안문제로 제외시킨다.
+jdbc.properties 
+
+
