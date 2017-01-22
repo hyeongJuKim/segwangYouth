@@ -161,8 +161,9 @@
 		<dependency>
 		    <groupId>org.webjars.bower</groupId>
 		    <artifactId>jquery</artifactId>
-		    <version>3.0.0-alpha1</version>
+		    <version>3.1.1</version>
 		</dependency>
+
 
 		<!-- bootstrap -->
 		<dependency>

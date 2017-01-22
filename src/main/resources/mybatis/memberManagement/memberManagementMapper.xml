@@ -4,14 +4,16 @@
 <mapper namespace="kr.co.segwangYouth.memberManagement.mapper.MemberManagementMapper">
 
     <select id="selectMemberList" parameterType="hashMap" resultType="java.util.Map">
-	SELECT MEMBER_NAME
+	SELECT A.MEMBER_NAME
+		 , MEMBER_SEQ
+		 , DATE_FORMAT(A.MEMBER_BIRTHDAY,'%Y년 %c월 %e일') AS MEMBER_BIRTHDAY
          , CASE MEMBER_GENDER  
                WHEN 'M' THEN '남' 
                WHEN 'F' THEN '여' 
                ELSE '?' 
            END AS MEMBER_GENDER
-         , VILLAGE_NAME
-         , PHONE_NUMBER
+         , B.VILLAGE_NAME
+         , A.PHONE_NUMBER
 		 , SF_GET_CODE_NAME('AA',MEMBER_POSITION) AS MEMBER_POSITION
 		 , MEMBER_JOB
 	 FROM  MEMBER A, VILLAGE B

@@ -11,10 +11,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 
-<link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery -->
+<script src="./webjars/jquery/3.1.1/dist/jquery.min.js"></script>
 
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="./webjars/bootstrap/3.3.5//css/bootstrap.min.css">
+<link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<!-- Bootstrap Core JavaScript -->
+<script src="./webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
 <style type="text/css">
 body{
@@ -48,15 +54,57 @@ body{
 }
 
 </style>
+
+<script>
+$(document).ready(function() {
+
+	// 청년 상세화면
+	$(".memberDetail").on("click",function(){
+		$('#myModal').modal('show'); 
+	});
+	
+});
+</script>
+
 <title>세광청년부 - 청년부 교적부</title>
 </head>
 
-
 <body>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span id="name"></span></h4>
+      </div>
+      <div class="modal-body">
+	      <div class="row">
+	          <div class="col-md-6"></div>
+	          <div class="col-md-6">성별: <span id="gender"></span></div>			
+	          
+	          <div class="col-md-6">생년월일: <span id="birthday"></span></div>
+	          <div class="col-md-6">E-Mail: <span id="e-mail"></span></div>			
+				 
+	          <div class="col-md-6">마을: <span id="village"></span></div>
+	          <div class="col-md-6">연락처: <span id="phoneNumber"></span></div>			
+	          
+	          <div class="col-md-6">직책: <span id="position"></span></div>
+	          <div class="col-md-6">직장: <span id="job"></span></div>			
+	      </div><!-- row -->
+      </div><!-- modal-body -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="container">
 
-	<br>
-	
 	<div class="row">
 <!-- 		<div class="panel panel-default"> -->
 <!-- 		  <div class="panel-heading"> -->
@@ -91,6 +139,7 @@ body{
 						<td style="width: 30px;">#</td>
 						<td style="width: 80px;">이름</td>
 						<td style="width: 50px;">성별</td>
+						<td>생년월일</td>
 						<td>마을</td>
 						<td>직책</td>
 						<td>연락처</td>
@@ -99,10 +148,11 @@ body{
 					</thead>
 					<tbody class="table-search">
 				<c:forEach var="member" items="${selectList.memberList}" varStatus="status">
-					<tr>
+					<tr style="cursor: pointer;" class="memberDetail" value="${member.MEMBER_SEQ}">
 						<td style="width: 30px; color:#ABABAB;">${status.count}</td>
 						<td>${member.MEMBER_NAME}</td>
 						<td>${member.MEMBER_GENDER}</td>
+						<td>${member.MEMBER_BIRTHDAY}</td>
 						<td>${member.VILLAGE_NAME}</td>
 						<td>${member.MEMBER_POSITION}</td>
 						<td>${member.PHONE_NUMBER}</td>
@@ -117,11 +167,6 @@ body{
 	</div> <!-- row -->
 
 	<div class="row">
-<!-- 		<div class="panel panel-default"> -->
-<!-- 		<div class="panel-heading"> -->
-<!-- 			<h3 class="panel-title">Village Member</h3> -->
-<!-- 		</div> -->
-<!-- 		<div class="panel-body"> -->
 
 			<h3 class="panel-title">Member Count</h3>
 			<c:forEach var="total" items="${selectList.statistics}">
@@ -142,27 +187,7 @@ body{
 			</span>
 			</c:forEach>  
 			
-<!-- 		</div> -->
-<!-- 		</div> -->
 	</div>
-	
-	
-	
-<%-- 	<div class="row customDiv">
-		마을별 전체 인원 <br>
-		<c:forEach var="memberCnt" items="${selectList.memberCount}" varStatus="status">
-		<span class="villageGroupCount">
-			${memberCnt.VILLAGE_NAME}<c:if test="${status.index != 0}">마을</c:if> : ${memberCnt.VILLAGE_CNT}명		
-		</span>
-		</c:forEach>
-	</div> --%>
-	
-
-<!-- jQuery -->
-<script src="./webjars/jquery/3.0.0-alpha1/dist/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="./webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </div>
 </body>
 </html>
