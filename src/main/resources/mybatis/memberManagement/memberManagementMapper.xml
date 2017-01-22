@@ -3,19 +3,30 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.segwangYouth.memberManagement.mapper.MemberManagementMapper">
 
-    <select id="selectMemberList" resultType="java.util.Map">
+    <select id="selectMemberList" parameterType="hashMap" resultType="java.util.Map">
 	SELECT MEMBER_NAME
          , CASE MEMBER_GENDER  
                WHEN 'M' THEN '남' 
                WHEN 'F' THEN '여' 
                ELSE '?' 
            END AS MEMBER_GENDER
+         , VILLAGE_NAME
+         , PHONE_NUMBER
 		 , SF_GET_CODE_NAME('AA',MEMBER_POSITION) AS MEMBER_POSITION
 		 , MEMBER_JOB
 	 FROM  MEMBER A, VILLAGE B
 	 WHERE A.VILLAGE_SEQ = B.VILLAGE_SEQ
 	   AND B.VILLAGE_USE_YN = 'Y'
- 	 ORDER BY A.MEMBER_NAME DESC
+	   <if test="name != null and !''.equals(name)">
+	   AND A.MEMBER_NAME LIKE CONCAT('%',#{name},'%')
+	   </if>
+	   <if test="village != null and !''.equals(village)">
+	   AND A.VILLAGE_SEQ = #{village}
+	   </if>
+	   <if test="memberPosition != null and !''.equals(memberPosition)">
+	   AND A.MEMBER_POSITION = #{memberPosition}
+	   </if>
+ 	 ORDER BY A.MEMBER_NAME ASC
     </select>
 
 	<select id="selectVillageAllList" resultType="java.util.Map">
@@ -34,11 +45,6 @@
     </select>
     
     <select id="selectMemberCount" resultType="java.util.Map">
-	SELECT '청년 수' AS VILLAGE_NAME
-	     , COUNT(*) AS VILLAGE_CNT  
-      FROM MEMBER
-     WHERE MEMBER_POSITION NOT IN ('4','5','6')
-	UNION
 	SELECT B.VILLAGE_NAME
 		 , COUNT(B.VILLAGE_NAME) AS VILLAGE_CNT
       FROM MEMBER A, VILLAGE B
@@ -46,5 +52,12 @@
 	  AND A.VILLAGE_SEQ = B.VILLAGE_SEQ
  	GROUP BY B.VILLAGE_NAME
     </select>
+    
+	<select id="selectStatistics" resultType="java.util.Map">
+	SELECT (SELECT COUNT(*) AS AAS FROM MEMBER A WHERE MEMBER_GENDER = 'M') AS MALE_COUNT
+	     , (SELECT COUNT(*) AS AAS FROM MEMBER A WHERE MEMBER_GENDER = 'F') AS FEMALE_COUNT
+	     , (SELECT COUNT(*) AS VILLAGE_CNT FROM MEMBER WHERE MEMBER_POSITION IN ('01','02','03','07')) AS TOTAL_COUNT
+	  FROM DUAL
+	</select>    
     
 </mapper>

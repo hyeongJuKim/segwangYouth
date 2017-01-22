@@ -8,12 +8,14 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberManagementMapper {
 
-    public List<Map> selectMemberList();
+    public List<Map> selectMemberList(Map map);
     
     public List<Map> selectCodeList(String classCode);
     
     public List<Map> selectVillageAllList();
     
     public List<Map> selectMemberCount();
+    
+    public List<Map> selectStatistics();
 	 
 }

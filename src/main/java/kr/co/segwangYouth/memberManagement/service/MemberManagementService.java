@@ -13,25 +13,27 @@ import kr.co.segwangYouth.memberManagement.mapper.MemberManagementMapper;
 @Service
 public class MemberManagementService {
 	
-//	@Autowired
-//	private SqlSessionTemplate sqlSession;	
-	
 	@Autowired 
 	private MemberManagementMapper mapper;
 	
-    public Map selectList() throws Exception {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public Map selectList(Map map) throws Exception {
     	
     	Map<String, Object> selectList = new HashMap();
     
-    	List<Map> memberList = mapper.selectMemberList();
-    	List<Map> codeListAA = mapper.selectCodeList("AA");
-    	List<Map> villageAllList = mapper.selectVillageAllList();
-    	List<Map> memberCount = mapper.selectMemberCount();	// 미을 전체 조회
+    	List<Map> codeListAA = mapper.selectCodeList("AA");	// 직책 코드 조회
+    	List<Map> villageAllList = mapper.selectVillageAllList();	// 마을 목록 조회
+    	List<Map> memberList = mapper.selectMemberList(map);	// 청년 조회
+    	List<Map> memberCount = mapper.selectMemberCount();	// 미을 현황 조회
+    	List<Map> statistics = mapper.selectStatistics();	// 남녀 통계
     	
     	selectList.put("codeListAA", codeListAA); // 직급코드 조회
     	selectList.put("villageAllList", villageAllList); // 마을장 조회
-    	selectList.put("memberCount", memberCount); // 청년 통계
     	selectList.put("memberList", memberList); // 청년 조회
+    	selectList.put("memberCount", memberCount); // 미을 현황 조회
+    	selectList.put("statistics", statistics); // 남녀 통계
+    	
+    	System.out.println(selectList);
     	
 		return selectList;
     }

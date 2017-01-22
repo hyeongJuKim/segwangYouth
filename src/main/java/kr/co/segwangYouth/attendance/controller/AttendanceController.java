@@ -21,9 +21,6 @@ import kr.co.segwangYouth.attendance.service.AttendanceService;
 public class AttendanceController {
 	private static final Logger logger = LoggerFactory.getLogger(AttendanceController.class);
 	
-	@Autowired
-	AttendanceService service;
-	
 	
 	@RequestMapping(value = "/attendance", method = RequestMethod.GET)
 	public String attendance(Model model) throws Exception{
