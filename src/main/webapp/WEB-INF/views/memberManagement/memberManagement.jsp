@@ -60,8 +60,40 @@ $(document).ready(function() {
 
 	// 청년 상세화면
 	$(".memberDetail").on("click",function(){
-		$('#myModal').modal('show'); 
+		var memberSeq = $(this).attr("value");
+		$.ajax({
+			url:"/segwangYouth/memberManagementDetail",
+			method:"POST",
+			data:{
+				memberSeq : memberSeq
+			},
+			dataType:"json",
+			success: function(data){
+				
+				$("#name").text(data.MEMBER_NAME);
+				$("#gender").text(data.MEMBER_GENDER);
+				$("#birthday").text(data.MEMBER_BIRTHDAY);
+				$("#village").text(data.VILLAGE_NAME);
+				$("#phoneNumber").text(data.PHONE_NUMBER);
+				$("#position").text(data.MEMBER_POSITION);
+				$("#job").text(data.MEMBER_JOB);
+				
+				
+		 		$('#myModal').modal('show'); 
+			},
+			error: function(error){
+				alert("문제야" + error.status);
+			} 
+		});		
+		
+		
 	});
+	
+	
+	
+
+	
+	
 	
 });
 </script>
@@ -81,13 +113,13 @@ $(document).ready(function() {
       </div>
       <div class="modal-body">
 	      <div class="row">
-	          <div class="col-md-6"></div>
+	          <div class="col-md-6">생년월일: <span id="birthday"></span></div>
 	          <div class="col-md-6">성별: <span id="gender"></span></div>			
 	          
-	          <div class="col-md-6">생년월일: <span id="birthday"></span></div>
-	          <div class="col-md-6">E-Mail: <span id="e-mail"></span></div>			
-				 
 	          <div class="col-md-6">마을: <span id="village"></span></div>
+	          <div class="col-md-6"></div>
+				 
+	          <div class="col-md-6">E-Mail: <span id="e-mail"></span></div>			
 	          <div class="col-md-6">연락처: <span id="phoneNumber"></span></div>			
 	          
 	          <div class="col-md-6">직책: <span id="position"></span></div>
@@ -96,7 +128,7 @@ $(document).ready(function() {
       </div><!-- modal-body -->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>

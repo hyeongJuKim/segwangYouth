@@ -55,6 +55,25 @@
  	GROUP BY B.VILLAGE_NAME
     </select>
     
+	<select id="selectMemberDetail" resultType="java.util.Map">
+	SELECT A.MEMBER_NAME
+		 , MEMBER_SEQ
+		 , DATE_FORMAT(A.MEMBER_BIRTHDAY,'%Y년 %c월 %e일') AS MEMBER_BIRTHDAY
+		 , CASE MEMBER_GENDER  
+			   WHEN 'M' THEN '남' 
+			   WHEN 'F' THEN '여' 
+			   ELSE '?' 
+		   END AS MEMBER_GENDER
+		 , B.VILLAGE_NAME
+		 , A.PHONE_NUMBER
+		 , SF_GET_CODE_NAME('AA',MEMBER_POSITION) AS MEMBER_POSITION
+		 , MEMBER_JOB
+	 FROM  MEMBER A, VILLAGE B
+	 WHERE A.VILLAGE_SEQ = B.VILLAGE_SEQ
+	   AND B.VILLAGE_USE_YN = 'Y'
+	   AND A.MEMBER_SEQ = #{memberSeq}
+	</select>
+    
 	<select id="selectStatistics" resultType="java.util.Map">
 	SELECT (SELECT COUNT(*) AS AAS FROM MEMBER A WHERE MEMBER_GENDER = 'M') AS MALE_COUNT
 	     , (SELECT COUNT(*) AS AAS FROM MEMBER A WHERE MEMBER_GENDER = 'F') AS FEMALE_COUNT

@@ -17,5 +17,7 @@ public interface MemberManagementMapper {
     public List<Map> selectMemberCount();
     
     public List<Map> selectStatistics();
+    
+    public Map selectMemberDetail(String memberSeq);
 	 
 }

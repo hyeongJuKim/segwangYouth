@@ -1,5 +1,6 @@
 package kr.co.segwangYouth.memberManagement.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class MemberManagementService {
 	private MemberManagementMapper mapper;
 	
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public Map selectList(Map map) throws Exception {
+	public Map selectList(Map map) throws SQLException {
     	
     	Map<String, Object> selectList = new HashMap();
     
@@ -33,9 +34,16 @@ public class MemberManagementService {
     	selectList.put("memberCount", memberCount); // 미을 현황 조회
     	selectList.put("statistics", statistics); // 남녀 통계
     	
-    	System.out.println(selectList);
-    	
 		return selectList;
     }
-	
+
+    @SuppressWarnings("unchecked")
+	public Map selectMemberManagementDetail(String memberSeq) throws Exception {
+    	Map<String,String> memberDetail = new HashMap();	
+    	memberDetail = mapper.selectMemberDetail(memberSeq);
+    	
+    	return memberDetail;
+    }
+    
+    
 }
