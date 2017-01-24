@@ -28,18 +28,8 @@ public class memberManagementController{
 	
 	@Autowired
 	private MemberManagementService service;
-	
-	
-//	@RequestMapping(value = "/memberManagement", method = RequestMethod.GET)
-//	public String memberManagement(Model model) throws Exception{
-//			logger.info("GET METHOD");
-//			
-//			Map selectList = (Map) service.selectList(null);
-//			model.addAttribute("selectList",selectList);
-//		return "memberManagement/memberManagement";
-//	}	
 
-
+	
 	/**
 	 * 청년 회원 조회
 	 * @param model

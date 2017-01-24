@@ -46,11 +46,13 @@ body{
     color: #333;
 }
 
-/* 각 컴포넌트별 구분 */
-.customDiv {
-/* 	background: #fff; */
-	/* padding: 10px 17px; */
-	/* border: 1px solid #E6E9ED; */
+.modal-title {
+/* 	font-size: 15px; */
+}
+
+.modal-body {
+font-size: 17px;
+
 }
 
 </style>
@@ -77,7 +79,7 @@ $(document).ready(function() {
 				$("#phoneNumber").text(data.PHONE_NUMBER);
 				$("#position").text(data.MEMBER_POSITION);
 				$("#job").text(data.MEMBER_JOB);
-				
+				$("#e-mail").text(data.MEMBER_EMAIL);
 				
 		 		$('#myModal').modal('show'); 
 			},
@@ -113,22 +115,27 @@ $(document).ready(function() {
       </div>
       <div class="modal-body">
 	      <div class="row">
-	          <div class="col-md-6">생년월일: <span id="birthday"></span></div>
+	          <div class="col-md-6">생년월일:<span id="birthday"></span></div>
 	          <div class="col-md-6">성별: <span id="gender"></span></div>			
 	          
 	          <div class="col-md-6">마을: <span id="village"></span></div>
-	          <div class="col-md-6"></div>
-				 
 	          <div class="col-md-6">E-Mail: <span id="e-mail"></span></div>			
+	          
 	          <div class="col-md-6">연락처: <span id="phoneNumber"></span></div>			
+	          <div class="col-md-6"></div>
 	          
 	          <div class="col-md-6">직책: <span id="position"></span></div>
 	          <div class="col-md-6">직장: <span id="job"></span></div>			
+	          
+	          <div class="col-md-12">주소: <span id="job"></span></div>			
+	          
+	          
+	          
 	      </div><!-- row -->
       </div><!-- modal-body -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary">수정</button>
       </div>
     </div>
   </div>
