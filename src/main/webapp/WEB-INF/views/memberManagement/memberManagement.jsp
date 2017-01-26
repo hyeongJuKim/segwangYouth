@@ -48,12 +48,23 @@ body{
 
 .modal-title {
 /* 	font-size: 15px; */
+margin: 10px;
 }
 
 .modal-body {
 font-size: 17px;
+/* margin: 10px; */
 
 }
+
+.modal-body-row {
+	margin-top: 10px;
+}
+
+#profile-img {
+	width: 180px;
+}
+
 
 </style>
 
@@ -80,20 +91,17 @@ $(document).ready(function() {
 				$("#position").text(data.MEMBER_POSITION);
 				$("#job").text(data.MEMBER_JOB);
 				$("#e-mail").text(data.MEMBER_EMAIL);
+				$("#memberAddress").text(data.MEMBER_ADDRESS);
 				
 		 		$('#myModal').modal('show'); 
 			},
 			error: function(error){
-				alert("문제야" + error.status);
+				alert("회원 상세 정보를 불러오는데 실패했습니다." + error.status);
 			} 
 		});		
 		
 		
 	});
-	
-	
-	
-
 	
 	
 	
@@ -115,23 +123,94 @@ $(document).ready(function() {
       </div>
       <div class="modal-body">
 	      <div class="row">
-	          <div class="col-md-6">생년월일:<span id="birthday"></span></div>
-	          <div class="col-md-6">성별: <span id="gender"></span></div>			
-	          
-	          <div class="col-md-6">마을: <span id="village"></span></div>
-	          <div class="col-md-6">E-Mail: <span id="e-mail"></span></div>			
-	          
-	          <div class="col-md-6">연락처: <span id="phoneNumber"></span></div>			
-	          <div class="col-md-6"></div>
-	          
-	          <div class="col-md-6">직책: <span id="position"></span></div>
-	          <div class="col-md-6">직장: <span id="job"></span></div>			
-	          
-	          <div class="col-md-12">주소: <span id="job"></span></div>			
-	          
-	          
-	          
-	      </div><!-- row -->
+	      	<div class="col-md-3">
+	      		<img id ="profile-img" src="${pageContext.request.contextPath}/resources/profile/male01.png"></img>
+	      	</div>
+	      	<div class="col-md-9">
+				<div class="col-md-3">생년월일:</div>	<div id="birthday" class="col-md-9"></div>
+				<div class="col-md-3">성별: </div>	<div id="gender" class="col-md-9"></div>	
+				<div class="col-md-3">마을: </div>	<div id="village" class="col-md-9"></div>
+				<div class="col-md-3">E-Mail: </div>	<div id="e-mail" class="col-md-9"></div>
+				<div class="col-md-3">연락처: </div>	<div id="phoneNumber" class="col-md-9"></div>			
+				<div class="col-md-3">직책: </div>	<div id="position" class="col-md-9"></div>
+				<div class="col-md-3">직장: </div>	<div id="job" class="col-md-9"></div>			
+				<div class="col-md-3">주소: </div>	<div id="memberAddress" class="col-md-9"></div>
+	      	</div>
+	      </div>	
+	      <div class="row">	      	
+	      	<div class="col-md-12">
+				<!-- 여기에 교가족관계 table, 신상사항 밑 data넣기 -->	      	
+				
+				가족관계
+				<table class="table table-hover">
+					<thead>
+					<tr class="active">
+						<td style="width: 30px;">#</td>
+						<td style="width: 60px;">관계</td>
+						<td style="width: 100px;">이름</td>
+						<td>종교</td>
+					</tr>
+					</thead>
+					<tbody class="table-search">
+				<c:forEach var="member" items="${selectList.memberList}" varStatus="status">
+					<tr>
+						<td style="width: 30px; color:#ABABAB;">1</td>
+						<td>부</td>
+						<td>김태영</td>
+						<td>기독교</td>
+					</tr>
+					<tr>
+						<td style="width: 30px; color:#ABABAB;">2</td>
+						<td>모</td>
+						<td>김경복</td>
+						<td>기독교</td>
+					</tr>
+					<tr>
+						<td style="width: 30px; color:#ABABAB;">3</td>
+						<td>형</td>
+						<td>김범주</td>
+						<td>기독교</td>
+					</tr>
+				</c:forEach>
+					</tbody>
+				</table>
+
+				가족관계
+				<table class="table table-hover">
+					<thead>
+					<tr class="active">
+						<td style="width: 30px;">#</td>
+						<td style="width: 60px;">관계</td>
+						<td style="width: 100px;">이름</td>
+						<td>종교</td>
+					</tr>
+					</thead>
+					<tbody class="table-search">
+				<c:forEach var="member" items="${selectList.memberList}" varStatus="status">
+					<tr>
+						<td style="width: 30px; color:#ABABAB;">1</td>
+						<td>부</td>
+						<td>김태영</td>
+						<td>기독교</td>
+					</tr>
+					<tr>
+						<td style="width: 30px; color:#ABABAB;">2</td>
+						<td>모</td>
+						<td>김경복</td>
+						<td>기독교</td>
+					</tr>
+					<tr>
+						<td style="width: 30px; color:#ABABAB;">3</td>
+						<td>형</td>
+						<td>김범주</td>
+						<td>기독교</td>
+					</tr>
+				</c:forEach>
+					</tbody>
+				</table>
+
+	      	</div>
+          </div><!-- row -->
       </div><!-- modal-body -->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
