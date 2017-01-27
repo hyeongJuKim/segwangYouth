@@ -38,9 +38,16 @@ public class MemberManagementService {
     }
 
     @SuppressWarnings("unchecked")
-	public Map selectMemberManagementDetail(String memberSeq) throws Exception {
-    	Map<String,String> memberDetail = new HashMap();	
-    	memberDetail = mapper.selectMemberDetail(memberSeq);
+	public Map<String,Object> selectMemberManagementDetail(String memberSeq) throws Exception {
+    	
+    	Map<String,Object> memberDetail = new HashMap();	
+    	
+    	Map<String,String>memberDetailInfo = mapper.selectMemberDetailInfo(memberSeq);
+    	List<Map> familyRelations= mapper.selectFamilyRelations(memberSeq);
+    	
+    	memberDetail.put("memberDetailInfo", memberDetailInfo);
+    	memberDetail.put("familyRelations", familyRelations);
+    	System.out.println(familyRelations);
     	
     	return memberDetail;
     }

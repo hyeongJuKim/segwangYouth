@@ -18,6 +18,8 @@ public interface MemberManagementMapper {
     
     public List<Map> selectStatistics();
     
-    public Map selectMemberDetail(String memberSeq);
+    public Map selectMemberDetailInfo(String memberSeq);
+    
+    public List<Map> selectFamilyRelations(String memberSeq);
 	 
 }

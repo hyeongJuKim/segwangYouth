@@ -54,8 +54,16 @@
 	  AND A.VILLAGE_SEQ = B.VILLAGE_SEQ
  	GROUP BY B.VILLAGE_NAME
     </select>
+   	 
+	<select id="selectStatistics" resultType="java.util.Map">
+	SELECT (SELECT COUNT(*) AS AAS FROM MEMBER A WHERE MEMBER_GENDER = 'M') AS MALE_COUNT
+	     , (SELECT COUNT(*) AS AAS FROM MEMBER A WHERE MEMBER_GENDER = 'F') AS FEMALE_COUNT
+	     , (SELECT COUNT(*) AS VILLAGE_CNT FROM MEMBER WHERE MEMBER_POSITION IN ('01','02','03','07')) AS TOTAL_COUNT
+	  FROM DUAL
+	</select>    
     
-	<select id="selectMemberDetail" resultType="java.util.Map">
+    
+	<select id="selectMemberDetailInfo" resultType="java.util.Map">
 	SELECT A.MEMBER_NAME
 		 , MEMBER_SEQ
 		 , DATE_FORMAT(A.MEMBER_BIRTHDAY,'%Y년 %c월 %e일') AS MEMBER_BIRTHDAY
@@ -75,12 +83,17 @@
 	   AND B.VILLAGE_USE_YN = 'Y'
 	   AND A.MEMBER_SEQ = #{memberSeq}
 	</select>
-    
-	<select id="selectStatistics" resultType="java.util.Map">
-	SELECT (SELECT COUNT(*) AS AAS FROM MEMBER A WHERE MEMBER_GENDER = 'M') AS MALE_COUNT
-	     , (SELECT COUNT(*) AS AAS FROM MEMBER A WHERE MEMBER_GENDER = 'F') AS FEMALE_COUNT
-	     , (SELECT COUNT(*) AS VILLAGE_CNT FROM MEMBER WHERE MEMBER_POSITION IN ('01','02','03','07')) AS TOTAL_COUNT
-	  FROM DUAL
-	</select>    
+
+	<select id="selectFamilyRelations" resultType="java.util.Map">
+	SELECT FAMILY_SEQ
+		 , MEMBER_SEQ
+		 , SF_GET_CODE_NAME('AC',FAMILY_CODE) AS FAMILY_CODE_NAME
+		 , FAMILY_CODE
+		 , FAMILY_NAME
+		 , SF_GET_CODE_NAME('AD',RELIGON_CODE) AS RELIGON_CODE
+	  FROM FAMILY_RELATIONS 
+	 WHERE MEMBER_SEQ = #{memberSeq} 
+	ORDER BY FAMILY_CODE
+	</select>
     
 </mapper>

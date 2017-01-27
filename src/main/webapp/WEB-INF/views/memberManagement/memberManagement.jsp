@@ -25,7 +25,6 @@
 <style type="text/css">
 body{
 	font-size: 12px;
-/* 	background-color: #F7F7F7;  */
 	background-color: #fff; 
 }
 
@@ -82,16 +81,33 @@ $(document).ready(function() {
 			},
 			dataType:"json",
 			success: function(data){
+				var memberDetailInfo = data.memberDetailInfo;
+				var familyRelations = data.familyRelations;
 				
-				$("#name").text(data.MEMBER_NAME);
-				$("#gender").text(data.MEMBER_GENDER);
-				$("#birthday").text(data.MEMBER_BIRTHDAY);
-				$("#village").text(data.VILLAGE_NAME);
-				$("#phoneNumber").text(data.PHONE_NUMBER);
-				$("#position").text(data.MEMBER_POSITION);
-				$("#job").text(data.MEMBER_JOB);
-				$("#e-mail").text(data.MEMBER_EMAIL);
-				$("#memberAddress").text(data.MEMBER_ADDRESS);
+				$("#name").text(memberDetailInfo.MEMBER_NAME);
+				$("#gender").text(memberDetailInfo.MEMBER_GENDER);
+				$("#birthday").text(memberDetailInfo.MEMBER_BIRTHDAY);
+				$("#village").text(memberDetailInfo.VILLAGE_NAME);
+				$("#phoneNumber").text(memberDetailInfo.PHONE_NUMBER);
+				$("#position").text(memberDetailInfo.MEMBER_POSITION);
+				$("#job").text(memberDetailInfo.MEMBER_JOB);
+				$("#e-mail").text(memberDetailInfo.MEMBER_EMAIL);
+				$("#memberAddress").text(memberDetailInfo.MEMBER_ADDRESS);
+				
+				for (var i in familyRelations){
+/* 					var cnt = parseInt(i,10) + 1; */
+					var num = Number(i)+1;
+					
+					$("#family-tbody").append(
+							  '<tr>'
+							+ '<td style="width: 30px; color:#ABABAB;">' + num + '</td>'
+							+ '<td>' + familyRelations[i].FAMILY_CODE_NAME + '</td>'
+							+ '<td>' + familyRelations[i].FAMILY_NAME + '</td>'
+							+ '<td>' + familyRelations[i].RELIGON_CODE + '</td>'
+							+ '</tr>'
+					);
+				}
+				
 				
 		 		$('#myModal').modal('show'); 
 			},
@@ -128,13 +144,13 @@ $(document).ready(function() {
 	      	</div>
 	      	<div class="col-md-9">
 				<div class="col-md-3">생년월일:</div>	<div id="birthday" class="col-md-9"></div>
-				<div class="col-md-3">성별: </div>	<div id="gender" class="col-md-9"></div>	
-				<div class="col-md-3">마을: </div>	<div id="village" class="col-md-9"></div>
-				<div class="col-md-3">E-Mail: </div>	<div id="e-mail" class="col-md-9"></div>
-				<div class="col-md-3">연락처: </div>	<div id="phoneNumber" class="col-md-9"></div>			
-				<div class="col-md-3">직책: </div>	<div id="position" class="col-md-9"></div>
-				<div class="col-md-3">직장: </div>	<div id="job" class="col-md-9"></div>			
-				<div class="col-md-3">주소: </div>	<div id="memberAddress" class="col-md-9"></div>
+				<div class="col-md-3">성별: </div>	<div id="gender" class="col-md-9"> </div>	
+				<div class="col-md-3">마을: </div>	<div id="village" class="col-md-9"> </div>
+				<div class="col-md-3">E-Mail: </div>	<div id="e-mail" class="col-md-9"> </div>
+				<div class="col-md-3">연락처: </div>	<div id="phoneNumber" class="col-md-9"> </div>			
+				<div class="col-md-3">직책: </div>	<div id="position" class="col-md-9"> </div>
+				<div class="col-md-3">직장: </div>	<div id="job" class="col-md-9"> </div>			
+				<div class="col-md-3">주소: </div>	<div id="memberAddress" class="col-md-9"> </div>
 	      	</div>
 	      </div>	
 	      <div class="row">	      	
@@ -151,61 +167,8 @@ $(document).ready(function() {
 						<td>종교</td>
 					</tr>
 					</thead>
-					<tbody class="table-search">
-				<c:forEach var="member" items="${selectList.memberList}" varStatus="status">
-					<tr>
-						<td style="width: 30px; color:#ABABAB;">1</td>
-						<td>부</td>
-						<td>김태영</td>
-						<td>기독교</td>
-					</tr>
-					<tr>
-						<td style="width: 30px; color:#ABABAB;">2</td>
-						<td>모</td>
-						<td>김경복</td>
-						<td>기독교</td>
-					</tr>
-					<tr>
-						<td style="width: 30px; color:#ABABAB;">3</td>
-						<td>형</td>
-						<td>김범주</td>
-						<td>기독교</td>
-					</tr>
-				</c:forEach>
-					</tbody>
-				</table>
-
-				가족관계
-				<table class="table table-hover">
-					<thead>
-					<tr class="active">
-						<td style="width: 30px;">#</td>
-						<td style="width: 60px;">관계</td>
-						<td style="width: 100px;">이름</td>
-						<td>종교</td>
-					</tr>
-					</thead>
-					<tbody class="table-search">
-				<c:forEach var="member" items="${selectList.memberList}" varStatus="status">
-					<tr>
-						<td style="width: 30px; color:#ABABAB;">1</td>
-						<td>부</td>
-						<td>김태영</td>
-						<td>기독교</td>
-					</tr>
-					<tr>
-						<td style="width: 30px; color:#ABABAB;">2</td>
-						<td>모</td>
-						<td>김경복</td>
-						<td>기독교</td>
-					</tr>
-					<tr>
-						<td style="width: 30px; color:#ABABAB;">3</td>
-						<td>형</td>
-						<td>김범주</td>
-						<td>기독교</td>
-					</tr>
-				</c:forEach>
+					<tbody class="table-search" id="family-tbody">
+					
 					</tbody>
 				</table>
 
