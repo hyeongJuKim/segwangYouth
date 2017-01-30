@@ -17,8 +17,6 @@
 	
 	<!-- webjar 매핑 추가 -->
 	<resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
-	
-	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -27,7 +25,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.co.segwangYouth" />
-	
-	
 	
 </beans:beans>

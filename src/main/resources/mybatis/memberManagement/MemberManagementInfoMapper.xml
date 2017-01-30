@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.segwangYouth.memberManagement.mapper.MemberManagementInfoMapper">
+
+	<select id="selectVillageAllList" resultType="java.util.Map">
+		SELECT VILLAGE_SEQ
+			 , VILLAGE_NAME 
+		 FROM  VILLAGE
+		WHERE VILLAGE_USE_YN = 'Y'
+		ORDER BY VILLAGE_NAME
+	</select>
+
+    <select id="selectCodeList" resultType="java.util.Map">
+	 SELECT A.CLASS_NAME, CODE_NO, CODE_NAME
+	  FROM CLASS_CODE_MASTER A, CODE_DETAIL B
+	 WHERE A.CLASS_CODE = B.HIGHER_CLASS_CODE
+	   AND CLASS_CODE = #{classCode} AND USE_YN = 'Y'
+    </select>
+    
+	<select id="selectMemberDetail" resultType="java.util.Map">
+	SELECT A.MEMBER_NAME
+		 , MEMBER_SEQ
+		 , DATE_FORMAT(A.MEMBER_BIRTHDAY,'%Y년 %c월 %e일') AS MEMBER_BIRTHDAY
+		 , CASE MEMBER_GENDER  
+			   WHEN 'M' THEN '남' 
+			   WHEN 'F' THEN '여' 
+			   ELSE '?' 
+		   END AS MEMBER_GENDER
+		 , B.VILLAGE_NAME
+		 , A.PHONE_NUMBER
+		 , SF_GET_CODE_NAME('AA',MEMBER_POSITION) AS MEMBER_POSITION
+		 , A.MEMBER_JOB
+		 , A.MEMBER_EMAIL
+		 , A.MEMBER_ADDRESS
+		 , A.FIRST_ATTENDANCE
+		 , DATE_FORMAT(A.FAITH_START_DATE,'%Y년 %c월 %e일') AS FAITH_START_DATE
+		 , SF_GET_CODE_NAME('AE',A.BAPTISM_CODE) AS BAPTISM_CODE
+		 , A.ATTENDANCE_CHURCH
+		 , A.OFFICIATOR
+		 , A.ATTENDANCE_REASON
+		 , A.LEADER
+		 , A.REGIST_TS
+		 , A.UPDATE_TS
+	 FROM  MEMBER A, VILLAGE B
+	 WHERE A.VILLAGE_SEQ = B.VILLAGE_SEQ
+	   AND B.VILLAGE_USE_YN = 'Y'
+	   AND A.MEMBER_SEQ = #{memberSeq}
+	</select>
+
+	<select id="selectFamilyRelations" resultType="java.util.Map">
+	SELECT FAMILY_SEQ
+		 , MEMBER_SEQ
+		 , SF_GET_CODE_NAME('AC',FAMILY_CODE) AS FAMILY_CODE_NAME
+		 , FAMILY_CODE
+		 , FAMILY_NAME
+		 , SF_GET_CODE_NAME('AD',RELIGON_CODE) AS RELIGON_CODE
+	  FROM FAMILY_RELATIONS 
+	 WHERE MEMBER_SEQ = #{memberSeq} 
+	ORDER BY FAMILY_CODE
+	</select>
+    
+</mapper>

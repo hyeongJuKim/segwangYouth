@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>
-	Hello world!
+	세광청년공동체 !
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>

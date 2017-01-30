@@ -23,8 +23,8 @@ import kr.co.segwangYouth.memberManagement.service.MemberManagementService;
  */
 
 @Controller
-public class memberManagementController{
-	private static final Logger logger = LoggerFactory.getLogger(memberManagementController.class);
+public class MemberManagementController{
+	private static final Logger logger = LoggerFactory.getLogger(MemberManagementController.class);
 	
 	@Autowired
 	private MemberManagementService service;
@@ -42,7 +42,7 @@ public class memberManagementController{
 			@RequestParam HashMap<String, String>searchMap
 			) throws Exception{
 			logger.info("POST METHOD");
-			System.out.println(searchMap);
+			System.out.println("search Param : " + searchMap);
 			
 			//TODO: client에서 server로 param을 전달 할 때마다 공통적으로 사용 될
 			// requestMap을 Map형태로 변환하는 모듈이필요하다.
@@ -58,7 +58,7 @@ public class memberManagementController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value ="/memberManagementDetail", method= RequestMethod.POST, produces="text/plain; charset=UTF-8")
+	@RequestMapping(value ="/memberManagementDetail", method= {RequestMethod.GET, RequestMethod.POST}, produces="text/plain; charset=UTF-8")
 	@ResponseBody
 	public String memberManagementDetail(@RequestParam("memberSeq") String memberSeq) throws Exception{
 		

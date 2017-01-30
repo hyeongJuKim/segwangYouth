@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+body{
+	font-size: 12px;
+	background-color: #fff; 
+}
+
+.table-search{
+    height: 420px !important;
+    overflow: scroll;
+}
+
+.villageGroupCountBox {
+	display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    width: 100px;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    border-color: #ccc;
+    border-radius: 4px;
+    color: #333;
+}
+
+.modal-title {
+	font-size: 26px;
+	margin: 10px;
+}
+
+.modal-body {
+	font-size: 17px;
+}
+
+.modal-body-row {
+	margin-top: 10px;
+}
+
+#profile-img {
+	width: 180px;
+}

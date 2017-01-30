@@ -2,8 +2,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<jsp:include page="../include/layoutTop.jsp" flush="true" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+
+<!-- jQuery -->
+<script src="./webjars/jquery/3.1.1/dist/jquery.min.js"></script>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<!-- Bootstrap Core JavaScript -->
+<script src="./webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/segwanhYouth.css">
 
 <script>
 $(document).ready(function() {
@@ -47,8 +65,7 @@ $(document).ready(function() {
 							+ '</tr>'
 					);
 				}
-				$("#btnDetail").val(memberDetailInfo.MEMBER_SEQ);
-								
+				
 		 		$('#myModal').modal('show'); 
 			},
 			error: function(error){
@@ -58,6 +75,14 @@ $(document).ready(function() {
 		
 	});
 	
+	$("#btnDetail").on("click",function(){
+		// 버튼의 부모의 memberSeq를 갖고 url 호출.
+		$("#btnDetail").attr("value");
+		document.location.href="memberManagementInfo";
+		
+	});
+	
+	
 });
 </script>
 
@@ -65,6 +90,7 @@ $(document).ready(function() {
 </head>
 
 <body>
+<%-- <%@include file="/include/base.jsp"%> --%>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -112,10 +138,8 @@ $(document).ready(function() {
           </div><!-- row -->
       </div><!-- modal-body -->
       <div class="modal-footer">
-        <form class="form-inline" method="post" action ="memberManagementInfo">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-	        <button type="submit" class="btn btn-primary" id="btnDetail" name="memberSeq" value="">상세보기</button>
-        </form>
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="btnDetail">상세보기</button>
       </div>
     </div>
   </div>
@@ -201,6 +225,5 @@ $(document).ready(function() {
 			
 	</div>
 </div>
-
-<jsp:include page="../include/layoutBottom.jsp" flush="true" />
-
+</body>
+</html>

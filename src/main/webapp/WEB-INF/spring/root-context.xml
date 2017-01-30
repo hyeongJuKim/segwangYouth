@@ -20,8 +20,6 @@
      
     <import resource="jdbc-config.xml"/>
     
-    <context:component-scan base-package="kr.co.segwangYouth" />
-    
     <mybatis:scan base-package="kr.co.segwangYouth"/>
     
 </beans>
