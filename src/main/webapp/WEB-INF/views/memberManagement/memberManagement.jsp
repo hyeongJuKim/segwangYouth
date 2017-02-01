@@ -22,9 +22,24 @@ $(document).ready(function() {
 			},
 			dataType:"json",
 			success: function(data){
+				
 				var memberDetailInfo = data.memberDetailInfo;
 				var familyRelations = data.familyRelations;
 				
+				
+				// 이미지 파일 셋팅
+				var image_path = "${pageContext.request.contextPath}/resources/images/profile/"
+				var image_name = "question_mark.png";
+				
+				if ("남" === memberDetailInfo.MEMBER_GENDER) {
+					image_name = "male01.png";
+				}else if ("여" === memberDetailInfo.MEMBER_GENDER){
+					image_name = "female01.png";
+				}
+				$("#profile-img").attr("src",image_path + image_name);
+				
+				
+				// 회원 정보 셋팅
 				$("#name").text(memberDetailInfo.MEMBER_NAME);
 				$("#gender").text(memberDetailInfo.MEMBER_GENDER);
 				$("#birthday").text(memberDetailInfo.MEMBER_BIRTHDAY);
@@ -77,7 +92,7 @@ $(document).ready(function() {
       <div class="modal-body">
 	      <div class="row">
 	      	<div class="col-md-3">
-	      		<img id ="profile-img" src="${pageContext.request.contextPath}/resources/profile/male01.png"></img>
+	      		<img id ="profile-img" src="${pageContext.request.contextPath}/resources/images/profile/question_mark.png"></img>
 	      	</div>
 	      	<div class="col-md-9">
 					<div class="col-md-3">생년월일:</div><div id="birthday" class="col-md-9"></div><div class="clearfix"></div>
@@ -127,7 +142,7 @@ $(document).ready(function() {
 	<div class="row">
 			<form class="form-inline" method="post" action ="/segwangYouth/memberManagement">
 			<div class="form-group">
-				이름: <input type="text" name="name"/>
+				이름: <input type="text" class="form-control" name="name"/>
 				마을:
 				<select class="form-control" name="village">
 					<option value="">전체</option>

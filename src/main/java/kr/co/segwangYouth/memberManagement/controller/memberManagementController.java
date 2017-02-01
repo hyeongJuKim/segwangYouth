@@ -42,7 +42,6 @@ public class MemberManagementController{
 			@RequestParam HashMap<String, String>searchMap
 			) throws Exception{
 			logger.info("POST METHOD");
-			System.out.println("search Param : " + searchMap);
 			
 			//TODO: client에서 server로 param을 전달 할 때마다 공통적으로 사용 될
 			// requestMap을 Map형태로 변환하는 모듈이필요하다.
