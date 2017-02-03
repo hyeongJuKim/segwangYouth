@@ -1,6 +1,10 @@
 package kr.co.segwangYouth.memberManagement.controller;
 
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.sound.midi.SysexMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,12 +43,30 @@ public class MemberManagementInfoController{
 			@RequestParam String memberSeq
 			) throws Exception{
 		
-			System.out.println("memberManagementInfo Controller");
-			
 			Map selectDetail = service.selectMemberDetail(memberSeq);
 			model.addAttribute("selectDetail",selectDetail);
 			
 			return "memberManagement/memberManagementInfo";
 	}	
+	
+	
+	@RequestMapping(value = "/memberManagementInfoPUT", method = RequestMethod.POST)
+	public String memberManagementInfoPut(
+			Model model,
+			@RequestParam HashMap<String,String>detailMap) throws Exception{
+
+		System.out.println("detailMap " +  detailMap);
+
+		
+		// update 서비스
+		service.updateMemberInfo(detailMap);
+		
+		//TODO: key를 갖고 다시 detail select service태우기 
+		
+		return "memberManagement/memberManagementInfo";
+	}
+			
+			
+	
 	
 }

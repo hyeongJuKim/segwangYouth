@@ -39,13 +39,6 @@
 		ORDER BY VILLAGE_NAME
 	</select>
 
-    <select id="selectCodeList" resultType="java.util.Map">
-	 SELECT A.CLASS_NAME, CODE_NO, CODE_NAME
-	  FROM CLASS_CODE_MASTER A, CODE_DETAIL B
-	 WHERE A.CLASS_CODE = B.HIGHER_CLASS_CODE
-	   AND CLASS_CODE = #{classCode} AND USE_YN = 'Y'
-    </select>
-    
     <select id="selectMemberCount" resultType="java.util.Map">
 	SELECT B.VILLAGE_NAME
 		 , COUNT(B.VILLAGE_NAME) AS VILLAGE_CNT

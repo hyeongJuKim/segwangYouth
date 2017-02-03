@@ -3,44 +3,31 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.segwangYouth.memberManagement.mapper.MemberManagementInfoMapper">
 
-	<select id="selectVillageAllList" resultType="java.util.Map">
-		SELECT VILLAGE_SEQ
-			 , VILLAGE_NAME 
-		 FROM  VILLAGE
-		WHERE VILLAGE_USE_YN = 'Y'
-		ORDER BY VILLAGE_NAME
-	</select>
-
-    <select id="selectCodeList" resultType="java.util.Map">
-	 SELECT A.CLASS_NAME, CODE_NO, CODE_NAME
-	  FROM CLASS_CODE_MASTER A, CODE_DETAIL B
-	 WHERE A.CLASS_CODE = B.HIGHER_CLASS_CODE
-	   AND CLASS_CODE = #{classCode} AND USE_YN = 'Y'
-    </select>
-    
 	<select id="selectMemberDetail" resultType="java.util.Map">
 	SELECT A.MEMBER_NAME
 		 , MEMBER_SEQ
-		 , DATE_FORMAT(A.MEMBER_BIRTHDAY,'%Y년 %c월 %e일') AS MEMBER_BIRTHDAY
+		 , DATE_FORMAT(A.MEMBER_BIRTHDAY,'%Y-%m-%d') AS MEMBER_BIRTHDAY
 		 , CASE MEMBER_GENDER  
 			   WHEN 'M' THEN '남' 
 			   WHEN 'F' THEN '여' 
 			   ELSE '?' 
 		   END AS MEMBER_GENDER
+		 , A.MEMBER_GENDER AS MEMBER_GENDER_CODE
 		 , B.VILLAGE_NAME
+		 , B.VILLAGE_SEQ
 		 , A.PHONE_NUMBER
-		 , SF_GET_CODE_NAME('AA',MEMBER_POSITION) AS MEMBER_POSITION
+		 , A.MEMBER_POSITION
 		 , A.MEMBER_JOB
 		 , A.MEMBER_EMAIL
 		 , A.MEMBER_ADDRESS
 		 , A.FIRST_ATTENDANCE
-		 , DATE_FORMAT(A.FAITH_START_DATE,'%Y년 %c월 %e일') AS FAITH_START_DATE
-		 , SF_GET_CODE_NAME('AE',A.BAPTISM_CODE) AS BAPTISM_CODE
+		 , DATE_FORMAT(A.FAITH_START_DATE,'%Y-%m-%d') AS FAITH_START_DATE
+		 , A.BAPTISM_CODE
 		 , A.ATTENDANCE_CHURCH
 		 , A.OFFICIATOR
 		 , A.ATTENDANCE_REASON
 		 , A.LEADER
-		 , A.REGIST_TS
+		 , DATE_FORMAT(A.REGIST_TS,'%Y-%m-%d') AS REGIST_TS
 		 , A.UPDATE_TS
 	 FROM  MEMBER A, VILLAGE B
 	 WHERE A.VILLAGE_SEQ = B.VILLAGE_SEQ
@@ -59,5 +46,27 @@
 	 WHERE MEMBER_SEQ = #{memberSeq} 
 	ORDER BY FAMILY_CODE
 	</select>
+	
+	<update id="updateMemberInfo" parameterType="java.util.Map">
+	UPDATE MEMBER A, VILLAGE B SET
+		  A.MEMBER_NAME = #{memberName}
+		, A.MEMBER_BIRTHDAY = #{memberBirthday}
+		, A.MEMBER_GENDER = #{memberGenderCode}
+	 	, A.VILLAGE_SEQ = #{villageSeq}
+		, A.MEMBER_EMAIL = #{memberEmail}
+		, A.PHONE_NUMBER = #{phoneNumber}
+		, A.MEMBER_POSITION = #{memberPosition}
+		, A.MEMBER_JOB = #{memberJob}
+		, A.MEMBER_ADDRESS = #{memberAddress}
+	 	, A.FAITH_START_DATE = #{faithStartDate}
+		, A.BAPTISM_CODE = #{baptismCode}
+	 	, A.OFFICIATOR = #{officiator}
+	 	, A.ATTENDANCE_CHURCH = #{attendanceChurch}
+		, A.ATTENDANCE_REASON = #{attendanceReason}
+		, A.LEADER = #{leader}
+		, A.UPDATE_TS = NOW()
+	WHERE A.VILLAGE_SEQ = B.VILLAGE_SEQ	
+	AND   A.MEMBER_SEQ = #{memberSeq}
+	</update>
     
 </mapper>

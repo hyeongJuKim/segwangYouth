@@ -1,9 +1,13 @@
 @CHARSET "UTF-8";
+
+/* Base Element*/
 body{
 	font-size: 12px;
 	background-color: #fff; 
 }
 
+
+/* Custom */
 .table-search{
     height: 420px !important;
     overflow: scroll;
@@ -37,3 +41,7 @@ body{
 #profile-img {
 	width: 180px;
 }
+
+
+
+

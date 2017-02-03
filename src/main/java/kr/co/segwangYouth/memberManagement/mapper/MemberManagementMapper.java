@@ -10,10 +10,6 @@ public interface MemberManagementMapper {
 
     public List<Map> selectMemberList(Map map);
     
-    public List<Map> selectCodeList(String classCode);
-    
-    public List<Map> selectVillageAllList();
-    
     public List<Map> selectMemberCount();
     
     public List<Map> selectStatistics();

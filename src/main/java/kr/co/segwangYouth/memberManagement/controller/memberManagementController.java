@@ -38,7 +38,8 @@ public class MemberManagementController{
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/memberManagement", method = {RequestMethod.GET, RequestMethod.POST})
-	public String memberManagementSearch(Model model,
+	public String memberManagementSearch(
+			Model model,
 			@RequestParam HashMap<String, String>searchMap
 			) throws Exception{
 			logger.info("POST METHOD");

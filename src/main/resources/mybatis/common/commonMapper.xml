@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.segwangYouth.common.mapper.CommonMapper">
+
+    <select id="selectCodeList" resultType="java.util.Map">
+	 SELECT A.CLASS_NAME, CODE_NO, CODE_NAME
+	  FROM CLASS_CODE_MASTER A, CODE_DETAIL B
+	 WHERE A.CLASS_CODE = B.HIGHER_CLASS_CODE
+	   AND CLASS_CODE = #{classCode} 
+	   AND USE_YN = 'Y'
+    </select>
+    
+   	<select id="selectVillageAllList" resultType="java.util.Map">
+		SELECT VILLAGE_SEQ
+			 , VILLAGE_NAME 
+		 FROM  VILLAGE
+		WHERE VILLAGE_USE_YN = 'Y'
+		ORDER BY VILLAGE_NAME
+	</select>
+    
+</mapper>
