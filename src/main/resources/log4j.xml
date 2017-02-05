@@ -12,8 +12,28 @@
 	
 	<!-- Application Loggers -->
 	<logger name="kr.co.segwangYouth">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
+
+	<!-- Mybatis logger -->
+    <logger name="jdbc.sqlonly">
+        <level value="debug" />
+		<appender-ref ref="console"/>  
+    </logger>
+
+    <logger name="jdbc.sqltiming">
+        <level value="debug" />
+        
+    </logger>
+
+    <logger name="jdbc.audit">
+        <level value="debug" />
+    </logger>
+
+    <logger name="jdbc.resultset">
+        <level value="debug" />
+    </logger>
+
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

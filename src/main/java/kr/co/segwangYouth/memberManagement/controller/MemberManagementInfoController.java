@@ -1,13 +1,9 @@
 package kr.co.segwangYouth.memberManagement.controller;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sound.midi.SysexMessage;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +20,8 @@ import kr.co.segwangYouth.memberManagement.service.MemberManagementInfoService;
 
 @Controller
 public class MemberManagementInfoController{
-	private static final Logger logger = LoggerFactory.getLogger(MemberManagementInfoController.class);
+//	private static final Logger logger = LoggerFactory.getLogger(MemberManagementInfoController.class);
+	Logger logger = Logger.getLogger(MemberManagementInfoController.class);
 	
 	@Autowired
 	private MemberManagementInfoService service;
@@ -42,7 +39,8 @@ public class MemberManagementInfoController{
 			Model model,
 			@RequestParam String memberSeq
 			) throws Exception{
-		
+			logger.info("memberManagementInfo Controller Start");
+			
 			Map selectDetail = service.selectMemberDetail(memberSeq);
 			model.addAttribute("selectDetail",selectDetail);
 			
@@ -54,12 +52,12 @@ public class MemberManagementInfoController{
 	public String memberManagementInfoPut(
 			Model model,
 			@RequestParam HashMap<String,String>detailMap) throws Exception{
-
-		System.out.println("detailMap " +  detailMap);
-
+			logger.info("memberManagementInfoPut Controller Start");
 		
-		// update 서비스
 		service.updateMemberInfo(detailMap);
+		Map selectDetail = service.selectMemberDetail(detailMap.get("memberSeq"));
+		
+		model.addAttribute("selectDetail",selectDetail);
 		
 		//TODO: key를 갖고 다시 detail select service태우기 
 		

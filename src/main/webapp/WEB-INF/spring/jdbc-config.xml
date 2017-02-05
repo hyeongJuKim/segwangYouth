@@ -16,16 +16,22 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="mapperLocations" value="classpath:/mybatis/**/*.xml" />
+        <property name="configLocation" value="classpath:META-INF/mybatis/mybatis-config.xml" />
     </bean>
      
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg  ref="sqlSessionFactory"></constructor-arg>
     </bean>
     
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	  <property name="basePackage" value="kr.co.segwangYouth" />
+	</bean>    
+
     <!-- 트랜잭션 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
     </bean> 
+     
      
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="#{jdbc['jdbc.driverClass']}	"/>

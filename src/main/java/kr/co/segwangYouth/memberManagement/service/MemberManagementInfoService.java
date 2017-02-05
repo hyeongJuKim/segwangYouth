@@ -23,7 +23,7 @@ public class MemberManagementInfoService {
 
 	
 	/**
-	 * 회원정보 수정화면
+	 * 청년 상세정보, 수정화면
 	 * @param memberSeq
 	 * @return
 	 * @throws SQLException
@@ -35,6 +35,7 @@ public class MemberManagementInfoService {
     
     	List<Map> villageAllList = commonMapper.selectVillageAllList();	// 마을 목록 조회
     	List<Map> codeListAA = commonMapper.selectCodeList("AA");	// 직책 코드 조회
+    	List<Map> codeListAF = commonMapper.selectCodeList("AF");	// 성별 코드 조회
     	List<Map> codeListAE = commonMapper.selectCodeList("AE");	// 세례 코드 조회
     	
     	Map<String,String> memberDetailInfo = mapper.selectMemberDetail(memberSeq); // 청년 상세조회
@@ -42,6 +43,7 @@ public class MemberManagementInfoService {
     	
     	selectDetail.put("villageAllList", villageAllList);
     	selectDetail.put("codeListAA", codeListAA);
+    	selectDetail.put("codeListAF", codeListAF);
     	selectDetail.put("codeListAE", codeListAE);
     	selectDetail.put("memberDetailInfo", memberDetailInfo);
     	selectDetail.put("familyRelations", familyRelations);
@@ -52,7 +54,6 @@ public class MemberManagementInfoService {
 	public int updateMemberInfo(Map map) throws SQLException {
 		int result = 0;
 		
-		System.out.println(map);
 		result = mapper.updateMemberInfo(map);
 		
 		return result;

@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 <body>
 	<div class="container">
-	${selectDetail.memberDetailInfo}
+	
 	<form class="form-inline" method="post" action="/segwangYouth/memberManagementInfoPUT">
 	
 		      <div class="row">
@@ -72,7 +72,14 @@ $(document).ready(function() {
 						
 						<div class="col-md-3">성별: </div>
 						<div id="gender" class="col-md-9">
-							<input type="text" class="form-control" name="memberGenderCode" value="${selectDetail.memberDetailInfo.MEMBER_GENDER}"/>
+							<select class="form-control" name="memberGenderCode">
+								<c:forEach var="codeListAF" items="${selectDetail.codeListAF}">
+								<option value="${codeListAF.CODE_NO}" ${ codeListAF.CODE_NO == selectDetail.memberDetailInfo.MEMBER_GENDER ?  'selected="selected"' : ' '}>
+									${codeListAF.CODE_NAME}
+								</option>
+								</c:forEach>
+							</select>									
+							
 						</div>
 						<div class="clearfix"></div>
 						
@@ -166,10 +173,10 @@ $(document).ready(function() {
 						</div>
 						<div class="clearfix"></div>						
 						
-						<br>
-						<div class="col-md-3">등록일: </div>
+						<br><br>
+						<div class="col-md-3">최근 수정일: </div>
 						<div id="registTs" class="col-md-9">
-							<input type="date" class="form-control" name="registTs" value="${selectDetail.memberDetailInfo.REGIST_TS}"/>
+							${selectDetail.memberDetailInfo.UPDATE_TS}
 						<div class="clearfix"></div>						
 						
 		      	</div>
