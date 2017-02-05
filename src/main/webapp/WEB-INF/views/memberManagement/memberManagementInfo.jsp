@@ -53,134 +53,128 @@ $(document).ready(function() {
 	<form class="form-inline" method="post" action="/segwangYouth/memberManagementInfoPUT">
 	
 		      <div class="row">
-		      	<div class="col-md-3">
-		      		<img id ="profile-img" src="${pageContext.request.contextPath}/resources/images/profile/question_mark.png"></img>
-		      	</div>
-		      	<div class="col-md-9">
-						<div class="col-md-3">이름:</div>
-						<div id="memberName" class="col-md-9">
-							<input type="hidden" name="memberSeq" value="${selectDetail.memberDetailInfo.MEMBER_SEQ}"/>
-							<input type="text" class="form-control" name="memberName" value="${selectDetail.memberDetailInfo.MEMBER_NAME}"/>
-						</div>
-						<div class="clearfix"></div>
+		      
+		      	<div class="col-md-12">
+					<table class="table">
+						<tr>
+							<td colspan="1" rowspan="4">
+								<img id ="profile-img" src="${pageContext.request.contextPath}/resources/images/profile/question_mark.png"></img>
+							</td>
+							<th colspan="1">이름</th>
+							<td colspan="2">
+								<input type="hidden" name="memberSeq" value="${selectDetail.memberDetailInfo.MEMBER_SEQ}"/>
+								<input type="text" class="form-control" name="memberName" value="${selectDetail.memberDetailInfo.MEMBER_NAME}"/>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="1">생년월일</th>
+							<td colspan="2">
+								<input type="date" class="form-control" name="memberBirthday" value="${selectDetail.memberDetailInfo.MEMBER_BIRTHDAY}"/>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="1">성별</th>
+							<td colspan="2">
+								<div id="gender" class="col-md-9">
+									<select class="form-control" name="memberGenderCode">
+										<c:forEach var="codeListAF" items="${selectDetail.codeListAF}">
+										<option value="${codeListAF.CODE_NO}" ${ codeListAF.CODE_NO == selectDetail.memberDetailInfo.MEMBER_GENDER_CODE ?  'selected="selected"' : ' '}>
+											${codeListAF.CODE_NAME}
+										</option>
+										</c:forEach>
+									</select>									
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="1">마을</th>
+							<td colspan="2">
+								<select class="form-control" name="villageSeq">
+									<c:forEach var="villageList" items="${selectDetail.villageAllList}">
+									<option value="${villageList.VILLAGE_SEQ}" ${ villageList.VILLAGE_SEQ == selectDetail.memberDetailInfo.VILLAGE_SEQ ?  'selected="selected"' : ' '}>
+										${villageList.VILLAGE_NAME}
+									</option>
+									</c:forEach>
+								</select>		
+							</td>
+						</tr>
+						<tr>
+							<th>연락처</th>
+							<td colspan="3">
+								<input type="text" class="form-control" name="phoneNumber" value="${selectDetail.memberDetailInfo.PHONE_NUMBER}"/>		
+							</td>
+						</tr>
+						<tr>
+							<th>직책</th>
+							<td colspan="3">
+								<select class="form-control" name="memberPosition">
+									<c:forEach var="codeListAA" items="${selectDetail.codeListAA}">
+									<option value="${codeListAA.CODE_NO}" ${ codeListAA.CODE_NO == selectDetail.memberDetailInfo.MEMBER_POSITION ?  'selected="selected"' : ' '}>
+										${codeListAA.CODE_NAME}
+									</option>
+									</c:forEach>
+								</select>		
+							</td>
+						</tr>
+						<tr>
+							<th>직장</th>
+							<td colspan="3">
+								<input type="text" class="form-control" name="memberJob" value="${selectDetail.memberDetailInfo.MEMBER_JOB}"/>
+							</td>
+						</tr>
+						<tr>
+							<th>신앙 시작일</th>
+							<td colspan="3">
+								<input type="date" class="form-control" name="faithStartDate" value="${selectDetail.memberDetailInfo.FAITH_START_DATE}"/>		
+							</td>
+						</tr>
 						
-						<div class="col-md-3">생년월일:</div>
-						<div id="birthday" class="col-md-9">
-							<input type="date" class="form-control" name="memberBirthday" value="${selectDetail.memberDetailInfo.MEMBER_BIRTHDAY}"/>
-						</div>
-						<div class="clearfix"></div>
-						
-						<div class="col-md-3">성별: </div>
-						<div id="gender" class="col-md-9">
-							<select class="form-control" name="memberGenderCode">
-								<c:forEach var="codeListAF" items="${selectDetail.codeListAF}">
-								<option value="${codeListAF.CODE_NO}" ${ codeListAF.CODE_NO == selectDetail.memberDetailInfo.MEMBER_GENDER ?  'selected="selected"' : ' '}>
-									${codeListAF.CODE_NAME}
-								</option>
-								</c:forEach>
-							</select>									
-							
-						</div>
-						<div class="clearfix"></div>
-						
-						<div class="col-md-3">마을: </div>
-						<div id="village" class="col-md-9">
-							<select class="form-control" name="villageSeq">
-								<c:forEach var="villageList" items="${selectDetail.villageAllList}">
-								<option value="${villageList.VILLAGE_SEQ}" ${ villageList.VILLAGE_SEQ == selectDetail.memberDetailInfo.VILLAGE_SEQ ?  'selected="selected"' : ' '}>
-									${villageList.VILLAGE_NAME}
-								</option>
-								</c:forEach>
-							</select>		
-						</div>
-						<div class="clearfix"></div>
-						
-						<div class="col-md-3">E-Mail: </div>
-						<div id="e-mail" class="col-md-9">
-							<input type="text" class="form-control" name="memberEmail" value="${selectDetail.memberDetailInfo.MEMBER_EMAIL}"/>
-						</div>
-						<div class="clearfix"></div>
-						
-						<div class="col-md-3">연락처: </div>
-						<div id="phoneNumber" class="col-md-9">
-							<input type="text" class="form-control" name="phoneNumber" value="${selectDetail.memberDetailInfo.PHONE_NUMBER}"/>
-						</div>
-						<div class="clearfix"></div>
-						
-						<div class="col-md-3">직책: </div>
-						<div id="position" class="col-md-9">
-							<select class="form-control" name="memberPosition">
-								<c:forEach var="codeListAA" items="${selectDetail.codeListAA}">
-								<option value="${codeListAA.CODE_NO}" ${ codeListAA.CODE_NO == selectDetail.memberDetailInfo.MEMBER_POSITION ?  'selected="selected"' : ' '}>
-									${codeListAA.CODE_NAME}
-								</option>
-								</c:forEach>
-							</select>		
-						</div>
-						<div class="clearfix"></div>						
-
-						<div class="col-md-3">직장: </div>
-						<div id="job" class="col-md-9">
-							<input type="text" class="form-control" name="memberJob" value="${selectDetail.memberDetailInfo.MEMBER_JOB}"/>
-						</div>
-						<div class="clearfix"></div>						
-						
-						<div class="col-md-3">주소: </div>
-						<div id="memberAddress" class="col-md-9">
-							<input type="text" class="form-control" name="memberAddress" value="${selectDetail.memberDetailInfo.MEMBER_ADDRESS}"/>
-						</div>
-						<div class="clearfix"></div>						
-						
-						<div class="col-md-3">신앙 시작일: </div>
-						<div id="faithStartDate" class="col-md-9">
-							<input type="date" class="form-control" name="faithStartDate" value="${selectDetail.memberDetailInfo.FAITH_START_DATE}"/>
-						</div>
-						<div class="clearfix"></div>						
-						
-						<div class="col-md-3">세례: </div>
-						<div id="baptismCode" class="col-md-9">
-							<select class="form-control" name=baptismCode>
-								<c:forEach var="codeListAE" items="${selectDetail.codeListAE}">
-								<option value="${codeListAE.CODE_NO}" ${ codeListAE.CODE_NO == selectDetail.memberDetailInfo.BAPTISM_CODE ?  'selected="selected"' : ' '}>
-									${codeListAE.CODE_NAME}
-								</option>
-								</c:forEach>
-							</select>							
-						</div>
-						<div class="clearfix"></div>						
-						
-						<div class="col-md-3">세례 집례자: </div>
-						<div id="officiator" class="col-md-9">
-							<input type="text" class="form-control" name="officiator" value="${selectDetail.memberDetailInfo.OFFICIATOR}"/>
-						</div>
-						<div class="clearfix"></div>						
-						
-						<div class="col-md-3">출석 교회: </div>
-						<div id="attendanceChurch" class="col-md-9">
-							<input type="text" class="form-control" name="attendanceChurch" value="${selectDetail.memberDetailInfo.ATTENDANCE_CHURCH}"/>
-						</div>
-						<div class="clearfix"></div>						
-						
-						<div class="col-md-3">교회 출석동기: </div>
-						<div id="attendanceReason" class="col-md-9">
-							<textarea onkeyup="resize(this)" class="form-control" name="attendanceReason">${selectDetail.memberDetailInfo.ATTENDANCE_REASON}</textarea>
-						</div>
-						<div class="clearfix"></div>						
-						
-						<div class="col-md-3">인도자: </div>
-						<div id="leader" class="col-md-9">
-							<input type="text" class="form-control" name="leader" value="${selectDetail.memberDetailInfo.LEADER}"/>
-						</div>
-						<div class="clearfix"></div>						
-						
-						<br><br>
-						<div class="col-md-3">최근 수정일: </div>
-						<div id="registTs" class="col-md-9">
-							${selectDetail.memberDetailInfo.UPDATE_TS}
-						<div class="clearfix"></div>						
-						
-		      	</div>
-		      </div>	
+						<tr>
+							<th>세례</th>
+							<td colspan="3">
+								<select class="form-control" name=baptismCode>
+									<c:forEach var="codeListAE" items="${selectDetail.codeListAE}">
+									<option value="${codeListAE.CODE_NO}" ${ codeListAE.CODE_NO == selectDetail.memberDetailInfo.BAPTISM_CODE ?  'selected="selected"' : ' '}>
+										${codeListAE.CODE_NAME}
+									</option>
+									</c:forEach>
+								</select>		
+							</td>
+						</tr>
+						<tr>
+							<th>세례 집례자</th>
+							<td colspan="3">
+								<input type="text" class="form-control" name="officiator" value="${selectDetail.memberDetailInfo.OFFICIATOR}"/>		
+							</td>
+						</tr>
+						<tr>
+							<th>출석 교회</th>
+							<td colspan="3">
+								<input type="text" class="form-control" name="attendanceChurch" value="${selectDetail.memberDetailInfo.ATTENDANCE_CHURCH}"/>		
+							</td>
+						</tr>
+						<tr>
+							<th>교회 출석 동기</th>
+							<td colspan="3">
+								<textarea class="form-control" name="attendanceReason">${selectDetail.memberDetailInfo.ATTENDANCE_REASON}</textarea>		
+							</td>
+						</tr>
+						<tr>
+							<th>인도자</th>
+							<td colspan="3">
+								<input type="text" class="form-control" name="leader" value="${selectDetail.memberDetailInfo.LEADER}"/>		
+							</td>
+						</tr>
+						<tr>
+							<th>최근 수정일</th>
+							<td colspan="3">
+								${selectDetail.memberDetailInfo.UPDATE_TS}		
+							</td>
+						</tr>
+					</table>
+		      	</div> <!--  col-md-9 -->
+		      </div> <!-- row -->
+		      
 		      <div class="row">	      	
 		      	<div class="col-md-12">
 					
