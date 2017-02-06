@@ -17,21 +17,21 @@
 
 	<!-- Mybatis logger -->
     <logger name="jdbc.sqlonly">
-        <level value="debug" />
+        <level value="info" />
 		<appender-ref ref="console"/>  
     </logger>
 
     <logger name="jdbc.sqltiming">
-        <level value="debug" />
+        <level value="info" />
         
     </logger>
 
     <logger name="jdbc.audit">
-        <level value="debug" />
+        <level value="info" />
     </logger>
 
     <logger name="jdbc.resultset">
-        <level value="debug" />
+        <level value="info" />
     </logger>
 
 	

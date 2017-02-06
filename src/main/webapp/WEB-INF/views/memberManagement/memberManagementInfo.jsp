@@ -30,6 +30,7 @@ $(document).ready(function() {
 	// 뒤로가기 버튼
 	$("#btnBack").on("click",function(){
 	    window.history.back();
+// 	    document.location.href = "memberManagement";
 	});
 	
 	
@@ -48,34 +49,36 @@ $(document).ready(function() {
 </head>
 
 <body>
-	<div class="container">
+	<div class="constraint">
 	
-	<form class="form-inline" method="post" action="/segwangYouth/memberManagementInfoPUT">
+	<form class="form-group" method="post" action="/segwangYouth/memberManagementInfoPUT">
 	
 		      <div class="row">
 		      
 		      	<div class="col-md-12">
+		      	
+		      		<h3>청년 정보</h3>
 					<table class="table">
 						<tr>
-							<td colspan="1" rowspan="4">
+							<td rowspan="4" style="width: 100px;">
 								<img id ="profile-img" src="${pageContext.request.contextPath}/resources/images/profile/question_mark.png"></img>
 							</td>
-							<th colspan="1">이름</th>
+							<th style="width: 180px;">이름</th>
 							<td colspan="2">
 								<input type="hidden" name="memberSeq" value="${selectDetail.memberDetailInfo.MEMBER_SEQ}"/>
 								<input type="text" class="form-control" name="memberName" value="${selectDetail.memberDetailInfo.MEMBER_NAME}"/>
 							</td>
 						</tr>
 						<tr>
-							<th colspan="1">생년월일</th>
+							<th>생년월일</th>
 							<td colspan="2">
 								<input type="date" class="form-control" name="memberBirthday" value="${selectDetail.memberDetailInfo.MEMBER_BIRTHDAY}"/>
 							</td>
 						</tr>
 						<tr>
-							<th colspan="1">성별</th>
+							<th>성별</th>
 							<td colspan="2">
-								<div id="gender" class="col-md-9">
+								<div id="gender">
 									<select class="form-control" name="memberGenderCode">
 										<c:forEach var="codeListAF" items="${selectDetail.codeListAF}">
 										<option value="${codeListAF.CODE_NO}" ${ codeListAF.CODE_NO == selectDetail.memberDetailInfo.MEMBER_GENDER_CODE ?  'selected="selected"' : ' '}>
@@ -87,7 +90,7 @@ $(document).ready(function() {
 							</td>
 						</tr>
 						<tr>
-							<th colspan="1">마을</th>
+							<th>마을</th>
 							<td colspan="2">
 								<select class="form-control" name="villageSeq">
 									<c:forEach var="villageList" items="${selectDetail.villageAllList}">
@@ -99,7 +102,7 @@ $(document).ready(function() {
 							</td>
 						</tr>
 						<tr>
-							<th>연락처</th>
+							<th colspan="1">연락처</th>
 							<td colspan="3">
 								<input type="text" class="form-control" name="phoneNumber" value="${selectDetail.memberDetailInfo.PHONE_NUMBER}"/>		
 							</td>
@@ -156,7 +159,7 @@ $(document).ready(function() {
 						<tr>
 							<th>교회 출석 동기</th>
 							<td colspan="3">
-								<textarea class="form-control" name="attendanceReason">${selectDetail.memberDetailInfo.ATTENDANCE_REASON}</textarea>		
+								<textarea class="form-control" style="max-width: 100%" name="attendanceReason">${selectDetail.memberDetailInfo.ATTENDANCE_REASON}</textarea>		
 							</td>
 						</tr>
 						<tr>
@@ -166,7 +169,7 @@ $(document).ready(function() {
 							</td>
 						</tr>
 						<tr>
-							<th>최근 수정일</th>
+							<th>마지막 수정일</th>
 							<td colspan="3">
 								${selectDetail.memberDetailInfo.UPDATE_TS}		
 							</td>
@@ -178,7 +181,7 @@ $(document).ready(function() {
 		      <div class="row">	      	
 		      	<div class="col-md-12">
 					
-					가족관계
+					<h3>가족관계</h3>
 					<table class="table table-hover">
 						<thead>
 						<tr class="active">
@@ -200,11 +203,13 @@ $(document).ready(function() {
 	
 		      	</div>
 	          </div><!-- row -->	
+	          <div class="btn-bottom-group">
 			        <button type="button" class="btn btn-default" id="btnBack">뒤로가기</button>
 			        <button type="button" class="btn btn-info" id="btnModify" value="">수정</button>
 			        <button type="submit" class="btn btn-warning" id="btnSave" value="">저장</button>
+	          </div>
 	   			</form>		
-	</div>
+	</div> <!-- constraint -->
 </body>
 
 <jsp:include page="../include/layoutBottom.jsp" flush="true" />

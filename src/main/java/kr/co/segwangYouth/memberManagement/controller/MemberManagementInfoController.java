@@ -59,8 +59,6 @@ public class MemberManagementInfoController{
 		
 		model.addAttribute("selectDetail",selectDetail);
 		
-		//TODO: key를 갖고 다시 detail select service태우기 
-		
 		return "memberManagement/memberManagementInfo";
 	}
 			
