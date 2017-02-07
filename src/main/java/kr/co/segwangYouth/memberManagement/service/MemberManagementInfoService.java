@@ -37,6 +37,7 @@ public class MemberManagementInfoService {
     	List<Map> codeListAA = commonMapper.selectCodeList("AA");	// 직책 코드 조회
     	List<Map> codeListAF = commonMapper.selectCodeList("AF");	// 성별 코드 조회
     	List<Map> codeListAE = commonMapper.selectCodeList("AE");	// 세례 코드 조회
+    	List<Map> codeListAD = commonMapper.selectCodeList("AD");	// 종교 코드 조회
     	
     	Map<String,String> memberDetailInfo = mapper.selectMemberDetail(memberSeq); // 청년 상세조회
     	List<Map> familyRelations = mapper.selectFamilyRelations(memberSeq); // 청년 가족관계
@@ -45,6 +46,7 @@ public class MemberManagementInfoService {
     	selectDetail.put("codeListAA", codeListAA);
     	selectDetail.put("codeListAF", codeListAF);
     	selectDetail.put("codeListAE", codeListAE);
+    	selectDetail.put("codeListAD", codeListAD);
     	selectDetail.put("memberDetailInfo", memberDetailInfo);
     	selectDetail.put("familyRelations", familyRelations);
     	
@@ -55,6 +57,8 @@ public class MemberManagementInfoService {
 		int result = 0;
 		
 		result = mapper.updateMemberInfo(map);
+		
+//		mapper.updateFamilyRelations(map);
 		
 		return result;
 	}

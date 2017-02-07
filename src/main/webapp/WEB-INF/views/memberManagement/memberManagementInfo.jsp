@@ -39,6 +39,20 @@ $(document).ready(function() {
 	    alert("수정   " + $("input[name=memberBirthday]").val());
 		
 	});
+	
+	// 가족 추가 버튼
+	$("#btnAddFamily").on("click",function(){
+		// 한 줄 넣기. 어떻게 만들지 생각
+		alert("추가");
+	});
+
+	// 가족 삭제 버튼
+	$("#btnDeleteFamily").on("click",function(){
+		// 안에 내용이 있으면 삭제하겠냐고 물어본 후 삭제
+		// 내용 없으면 그냥 삭제
+		alert("삭제");
+		
+	});
 
 		
 		
@@ -182,6 +196,9 @@ $(document).ready(function() {
 		      	<div class="col-md-12">
 					
 					<h3>가족관계</h3>
+					<button type="button" id="btnAddFamily" class="btn btn-warning btn-xs">추가</button>
+					<button type="button" id="btnDeleteFamily" class="btn btn-danger btn-xs">삭제</button>
+					
 					<table class="table table-hover">
 						<thead>
 						<tr class="active">
@@ -189,16 +206,28 @@ $(document).ready(function() {
 							<td style="width: 60px;">관계</td>
 							<td style="width: 100px;">이름</td>
 							<td>종교</td>
+							<td>메모</td>
 						</tr>
 						</thead>
+						<tbody id="family-tbody">
 							<c:forEach var="familyRelation" items="${selectDetail.familyRelations}" varStatus="status">
 								  <tr>
-									<td style="width: 30px; color:#ABABAB;">${status.count}</td>
-									<td>${familyRelation.FAMILY_CODE_NAME}</td>
-									<td>${familyRelation.FAMILY_NAME}</td>
-									<td>${familyRelation.RELIGON_CODE}</td>
+									<td style="width: 30px; color:#ABABAB;">${status.count} <input type="hidden" class="form-control" name="memberSeq" value="${familyRelation.codeListAD}"/></td>
+									<td><input type="text" class="form-control" name="familyCode" value="${familyRelation.FAMILY_CODE_NAME}"/></td>
+									<td><input type="text" class="form-control" name="familyName" value="${familyRelation.FAMILY_NAME}"/></td>
+									<td>
+									<select class="form-control" name=relginCode>
+										<c:forEach var="codeListAD" items="${selectDetail.codeListAD}">
+											<option value="${codeListAD.CODE_NO}" ${ codeListAD.CODE_NO == familyRelation.RELIGON_CODE ?  'selected="selected"' : ' '}>
+												${codeListAD.CODE_NAME}
+											</option>
+										</c:forEach>
+									</select>
+									</td>
+									<td><input type="text" class="form-control" name="remark" value="${familyRelation.REMARK}"/></td>
 									</tr>
 							</c:forEach>
+						</tbody>
 					</table>
 	
 		      	</div>

@@ -38,6 +38,7 @@
 		 , FAMILY_CODE
 		 , FAMILY_NAME
 		 , SF_GET_CODE_NAME('AD',RELIGON_CODE) AS RELIGON_CODE
+		 , REMARK
 	  FROM FAMILY_RELATIONS 
 	 WHERE MEMBER_SEQ = #{memberSeq} 
 	ORDER BY FAMILY_CODE
@@ -63,6 +64,19 @@
 		, A.UPDATE_TS = NOW()
 	WHERE A.VILLAGE_SEQ = B.VILLAGE_SEQ	
 	AND   A.MEMBER_SEQ = #{memberSeq}
+	</update>
+	
+	<update id="updateFamilyRelations" parameterType="java.util.Map">
+	<!--  MEMBER_SEQ, FAMILY_SEQ NOT NULL 일 때 UPDATE, NULL이면 INSERT -->
+	<!--  아니면 그냥 DELETE INSERT -->
+	<!--  TABLE 구조 생각하기 -->
+	UPDATE FAMILY_RELATIONS SET
+		  FAMILY_CODE = #{familyCode}
+		, FAMILY_NAME = #{familyName}
+		, RELIGON_CODE = #{religonCode}
+		, REMARK
+	WHERE MEMBER_SEQ = #{memberSeq}
+	  AND FAMILY_SEQ = #{familySeq}
 	</update>
     
 </mapper>
