@@ -15,7 +15,7 @@ $(document).ready(function() {
 		$("#btnDetail").attr("value",memberSeq);
 		
 		$.ajax({
-			url:"members/" + memberSeq + "/modal",
+			url:"${pageContext.request.contextPath}/members/" + memberSeq + "/modal",
 			method:"GET",
 			data:{
 				memberSeq : memberSeq
@@ -77,21 +77,25 @@ $(document).ready(function() {
 		$("#btnDetail").on("click",function(){
 			var memberSeq = $(this).attr("value");
 
-			$.ajax({
-				url:"api/members/" + memberSeq,
-				method:"GET",
-				data:{
-					memberSeq : memberSeq
-				},
-				dataType:"json",
-				success: function(data){
-					document.getElementById("formDetail").action = "members/" + memberSeq;
-					document.getElementById("formDetail").submit();
-				},
-				error: function(error){
-					alert("회원 상세 정보를 불러오는데 실패했습니다." + error.status);
-				} 				
-			});
+			document.getElementById("formDetail").method = "GET";
+			document.getElementById("formDetail").action = "${pageContext.request.contextPath}/members/" + memberSeq;
+			document.getElementById("formDetail").submit();
+			
+// 			$.ajax({
+// 				url:"${pageContext.request.contextPath}/api/members/" + memberSeq,
+// 				method:"GET",
+// 				data:{
+// 					memberSeq : memberSeq
+// 				},
+// 				dataType:"json",
+// 				success: function(data){
+// 					document.getElementById("formDetail").action = "${pageContext.request.contextPath}/members/" + memberSeq;
+// 					document.getElementById("formDetail").submit();
+// 				},
+// 				error: function(error){
+// 					alert("회원 상세 정보를 불러오는데 실패했습니다." + error.status);
+// 				} 				
+// 			});
 			
 			
 		});	// jQuery
@@ -151,7 +155,7 @@ $(document).ready(function() {
           </div><!-- row -->
       </div><!-- modal-body -->
       <div class="modal-footer">
-        <form class="form-inline" method="get" id="formDetail">
+        <form class="form-inline" id="formDetail">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 	        <button type="button" class="btn btn-primary" id="btnDetail" name="memberSeq" value="">상세보기</button>
         </form>

@@ -30,14 +30,44 @@ $(document).ready(function() {
 	// 뒤로가기 버튼
 	$("#btnBack").on("click",function(){
 	    window.history.back();
-// 	    document.location.href = "memberManagement";
 	});
 	
+	
+	// 저장 버튼
+	$("#btnSave").on("click",function(){
+// 		var memberForm = $("#memberForm").serializeArray();
+// 		var memberForm = $("#memberForm").serialize();
+	    var memberSeq = $("input[name=memberSeq]").val();
+	    
+// 	    var memberForm = JSON.stringify(memberForm);
+	
+		var memberForm = { 'newWeekEntry': "sdadasdasd", 'oldWeekEntry': "asdasda" };
+	
+	
+	    alert(memberForm);
+	    alert(JSON.stringify(memberForm));
+	    
+		$.ajax({
+			url:"${pageContext.request.contextPath}/members/" + memberSeq,
+			method:"PUT",
+			type:"PUT",
+			data: JSON.stringify(memberForm),
+			dataType:"json",
+			contentType : "application/json; charset=UTF-8",
+			success: function(data){
+// 				window.location.reload(true);
+			},
+			error: function(error){
+				alert("회원 상세 정보를 불러오는데 실패했습니다." + error.status);
+			}
+		});
+
+	    
+	});
 	
 	// 수정 버튼
 	$("#btnModify").on("click",function(){
 	    alert("수정   " + $("input[name=memberBirthday]").val());
-		
 	});
 	
 	// 가족 추가 버튼
@@ -65,7 +95,7 @@ $(document).ready(function() {
 <body>
 	<div class="constraint">
 	
-	<form class="form-group" name="memberForm" method="post" action="/segwangYouth/memberManagementInfo">
+	<form class="form-group" id="memberForm">
 	
 		      <div class="row">
 		      
@@ -235,7 +265,7 @@ $(document).ready(function() {
 	          <div class="btn-bottom-group">
 			        <button type="button" class="btn btn-default" id="btnBack">뒤로가기</button>
 			        <button type="button" class="btn btn-info" id="btnModify" value="">수정</button>
-			        <button type="submit" class="btn btn-warning" id="btnSave" value="">저장</button>
+			        <button type="button" class="btn btn-warning" id="btnSave" value="">저장</button>
 	          </div>
 	   			</form>		
 	</div> <!-- constraint -->

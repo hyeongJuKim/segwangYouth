@@ -68,7 +68,6 @@ public class MemberManagementController{
 	}
 	
 	
-	
 	/**
 	 * 청년 회원 조회 상세화면 (상세)
 	 * api/members/{memberSeq}
