@@ -12,13 +12,14 @@
 <meta name="description" content="">
 
 <!-- jQuery -->
-<script src="./webjars/jquery/3.1.1/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/webjars/jquery/3.1.1/dist/jquery.min.js"></script>
+
 
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.5/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <!-- Bootstrap Core JavaScript -->
-<script src="./webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/segwanhYouth.css">

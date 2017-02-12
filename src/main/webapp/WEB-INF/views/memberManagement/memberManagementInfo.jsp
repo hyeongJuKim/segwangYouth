@@ -65,7 +65,7 @@ $(document).ready(function() {
 <body>
 	<div class="constraint">
 	
-	<form class="form-group" method="post" action="/segwangYouth/memberManagementInfoPUT">
+	<form class="form-group" name="memberForm" method="post" action="/segwangYouth/memberManagementInfo">
 	
 		      <div class="row">
 		      

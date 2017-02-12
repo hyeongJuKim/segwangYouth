@@ -15,8 +15,8 @@ $(document).ready(function() {
 		$("#btnDetail").attr("value",memberSeq);
 		
 		$.ajax({
-			url:"memberManagementDetail",
-			method:"POST",
+			url:"members/" + memberSeq + "/modal",
+			method:"GET",
 			data:{
 				memberSeq : memberSeq
 			},
@@ -73,6 +73,30 @@ $(document).ready(function() {
 		
 	});
 	
+	// 버튼 상세보기
+		$("#btnDetail").on("click",function(){
+			var memberSeq = $(this).attr("value");
+
+			$.ajax({
+				url:"api/members/" + memberSeq,
+				method:"GET",
+				data:{
+					memberSeq : memberSeq
+				},
+				dataType:"json",
+				success: function(data){
+					document.getElementById("formDetail").action = "members/" + memberSeq;
+					document.getElementById("formDetail").submit();
+				},
+				error: function(error){
+					alert("회원 상세 정보를 불러오는데 실패했습니다." + error.status);
+				} 				
+			});
+			
+			
+		});	// jQuery
+	
+	
 });
 </script>
 
@@ -127,9 +151,9 @@ $(document).ready(function() {
           </div><!-- row -->
       </div><!-- modal-body -->
       <div class="modal-footer">
-        <form class="form-inline" method="post" action ="memberManagementInfo">
+        <form class="form-inline" method="get" id="formDetail">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-	        <button type="submit" class="btn btn-primary" id="btnDetail" name="memberSeq" value="">상세보기</button>
+	        <button type="button" class="btn btn-primary" id="btnDetail" name="memberSeq" value="">상세보기</button>
         </form>
       </div>
     </div>
@@ -140,7 +164,7 @@ $(document).ready(function() {
 <div class="container">
 
 	<div class="row">
-			<form class="form-inline" method="post" action ="/segwangYouth/memberManagement">
+			<form class="form-inline" method="post" action ="/segwangYouth/members">
 			<div class="form-group">
 				이름: <input type="text" class="form-control" name="name"/>
 				마을:
