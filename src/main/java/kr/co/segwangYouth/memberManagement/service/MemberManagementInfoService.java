@@ -16,7 +16,7 @@ import kr.co.segwangYouth.memberManagement.mapper.MemberManagementInfoMapper;
 public class MemberManagementInfoService {
 	
 	@Autowired 
-	private MemberManagementInfoMapper mapper;
+	public MemberManagementInfoMapper mapper;
 	
 	@Autowired
 	public CommonMapper commonMapper;

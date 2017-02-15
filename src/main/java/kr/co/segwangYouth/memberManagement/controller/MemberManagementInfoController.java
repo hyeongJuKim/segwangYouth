@@ -3,6 +3,9 @@ package kr.co.segwangYouth.memberManagement.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.sound.midi.SysexMessage;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,22 +33,24 @@ public class MemberManagementInfoController{
 	@Autowired
 	private MemberManagementInfoService service;
 	
-	@RequestMapping(value = "/members/{memberSeq}", method = RequestMethod.PUT, produces="text/plain; charset=UTF-8")
+	@RequestMapping(value = "/members/{memberSeq}", method = RequestMethod.PUT, produces={"application/json"})
 	@ResponseBody
 	public String membersPut(
-			Model model, @PathVariable("memberSeq") String memberSeq
-			,@RequestBody HashMap<String,Object>memberForm
+			@PathVariable("memberSeq") String memberSeq
+			,@RequestBody Map<Object,Object> memberForm
 			) throws Exception{
 		logger.info("memberManagementInfoPut Controller Start");
 		
+		memberForm.get("");
+		
 		System.out.println(memberForm);
-//		service.updateMemberInfo(detail`Map);
+//		service.updateMemberInfo(detailMap);
 		
 //		Map selectDetail = service.selectMemberDetail(detailMap.get("memberSeq"));
 //		model.addAttribute("selectDetail",selectDetail);
 		
 		Gson gson = new Gson();
-		String json = gson.toJson(memberSeq);
+		String json = gson.toJson(memberForm);
 		
 		return json;
 //		return "memberManagement/memberManagementInfo";

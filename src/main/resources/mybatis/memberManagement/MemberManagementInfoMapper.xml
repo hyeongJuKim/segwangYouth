@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.segwangYouth.memberManagement.mapper.MemberManagementInfoMapper">
 
-	<select id="selectMemberDetail" resultType="java.util.Map">
+	<select id="selectMemberDetail" parameterType="string" resultType="java.util.Map">
 	SELECT A.MEMBER_NAME
 		 , MEMBER_SEQ
 		 , DATE_FORMAT(A.MEMBER_BIRTHDAY,'%Y-%m-%d') AS MEMBER_BIRTHDAY

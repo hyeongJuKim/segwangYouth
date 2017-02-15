@@ -36,24 +36,21 @@ $(document).ready(function() {
 	// 저장 버튼
 	$("#btnSave").on("click",function(){
 // 		var memberForm = $("#memberForm").serializeArray();
-// 		var memberForm = $("#memberForm").serialize();
+		var memberForm = $("#memberForm").serialize();
 	    var memberSeq = $("input[name=memberSeq]").val();
-	    
 // 	    var memberForm = JSON.stringify(memberForm);
-	
-		var memberForm = { 'newWeekEntry': "sdadasdasd", 'oldWeekEntry': "asdasda" };
-	
-	
+// 		var memberForm = { 'newWeekEntry': "sdadasdasd", 'oldWeekEntry': "asdasda" };
 	    alert(memberForm);
-	    alert(JSON.stringify(memberForm));
 	    
 		$.ajax({
 			url:"${pageContext.request.contextPath}/members/" + memberSeq,
-			method:"PUT",
 			type:"PUT",
 			data: JSON.stringify(memberForm),
 			dataType:"json",
-			contentType : "application/json; charset=UTF-8",
+// 			contentType: 'text',
+			contentType : 'application/json; charset=utf-8' ,
+			contentType : "application/json",
+			accept : "application/json",
 			success: function(data){
 // 				window.location.reload(true);
 			},
