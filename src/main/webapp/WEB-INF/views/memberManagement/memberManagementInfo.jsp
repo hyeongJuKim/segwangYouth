@@ -33,23 +33,28 @@ $(document).ready(function() {
 	});
 	
 	
+	// 삭제 버튼
+	$("#btnDelete").on("click",function(){
+		// 정말로 삭제하시겠습니까? 물어 본 후 삭제.
+		
+		// form.method=delete 날리기.
+		// 성공하면 조회 목록으로.  
+	});
+	
+	
 	// 저장 버튼
 	$("#btnSave").on("click",function(){
-// 		var memberForm = $("#memberForm").serializeArray();
 		var memberForm = $("#memberForm").serialize();
 	    var memberSeq = $("input[name=memberSeq]").val();
 // 	    var memberForm = JSON.stringify(memberForm);
-// 		var memberForm = { 'newWeekEntry': "sdadasdasd", 'oldWeekEntry': "asdasda" };
-	    alert(memberForm);
+	    alert("MemberForm ::::" + memberForm);
 	    
 		$.ajax({
 			url:"${pageContext.request.contextPath}/members/" + memberSeq,
 			type:"PUT",
 			data: JSON.stringify(memberForm),
 			dataType:"json",
-// 			contentType: 'text',
 			contentType : 'application/json; charset=utf-8' ,
-			contentType : "application/json",
 			accept : "application/json",
 			success: function(data){
 // 				window.location.reload(true);
@@ -263,6 +268,10 @@ $(document).ready(function() {
 			        <button type="button" class="btn btn-default" id="btnBack">뒤로가기</button>
 			        <button type="button" class="btn btn-info" id="btnModify" value="">수정</button>
 			        <button type="button" class="btn btn-warning" id="btnSave" value="">저장</button>
+<!-- 	        <form:form method="post"> -->
+	        		<input type="hidden" name = "_method" value="delete">
+			        <button type="button" class="btn btn-danger" id="btnDelete" value="">삭제</button>
+<!-- 	        </form:form> -->
 	          </div>
 	   			</form>		
 	</div> <!-- constraint -->

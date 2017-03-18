@@ -46,6 +46,15 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+<!-- 	<filter>
+		<filter-name>httpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>httpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+ -->	
 	<!-- Resufull 방식을 사용하기 위한 처리 -->
 <!-- 	<filter> -->
 <!-- 	    <filter-name>httpMethodFilter</filter-name> -->
